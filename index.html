@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -55,7 +56,7 @@
         linear-gradient(rgba(29, 78, 216, 0.045) 1px, transparent 1px),
         linear-gradient(90deg, rgba(29, 78, 216, 0.045) 1px, transparent 1px);
       background-size: 34px 34px;
-      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.85), transparent 80%);
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.85), transparent 80%);
       z-index: -2;
     }
 
@@ -63,12 +64,15 @@
       position: relative;
       overflow: hidden;
       color: var(--white);
-      padding: 42px 24px 48px;
+      padding: 54px 24px 76px;
       text-align: center;
       background:
-        radial-gradient(circle at 20% 30%, rgba(96, 165, 250, 0.55), transparent 30%),
-        linear-gradient(135deg, var(--blue-950), var(--blue-800) 52%, var(--blue-600));
-      box-shadow: 0 22px 60px rgba(15, 23, 42, 0.22);
+        radial-gradient(circle at 14% 18%, rgba(56, 189, 248, 0.45), transparent 30%),
+        radial-gradient(circle at 86% 10%, rgba(124, 58, 237, 0.38), transparent 28%),
+        radial-gradient(circle at 50% 110%, rgba(59, 130, 246, 0.42), transparent 34%),
+        linear-gradient(135deg, #050816 0%, #07111f 42%, #102a61 100%);
+      box-shadow: 0 28px 80px rgba(15, 23, 42, 0.28);
+      isolation: isolate;
     }
 
     header::before,
@@ -76,37 +80,104 @@
       content: "";
       position: absolute;
       border-radius: 999px;
-      background: rgba(255,255,255,0.11);
-      filter: blur(1px);
+      pointer-events: none;
+      z-index: -1;
     }
 
     header::before {
-      width: 260px;
-      height: 260px;
-      right: -80px;
-      top: -100px;
+      width: 420px;
+      height: 420px;
+      right: -140px;
+      top: -190px;
+      background: rgba(255, 255, 255, 0.10);
+      box-shadow: 0 0 0 34px rgba(255, 255, 255, 0.035);
     }
 
     header::after {
-      width: 360px;
-      height: 360px;
-      left: -140px;
-      bottom: -210px;
+      width: 520px;
+      height: 520px;
+      left: -190px;
+      bottom: -330px;
+      background: rgba(59, 130, 246, 0.18);
+      filter: blur(2px);
     }
 
-    header h1 {
-      position: relative;
-      font-size: clamp(28px, 4vw, 44px);
-      margin-bottom: 12px;
-      letter-spacing: -0.8px;
-      z-index: 1;
+    .hero-pattern {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.95), transparent 78%);
+      pointer-events: none;
+      z-index: -1;
     }
 
-    header p {
+    .brand-hero {
       position: relative;
-      opacity: 0.9;
-      font-size: 16px;
-      z-index: 1;
+      z-index: 2;
+      display: grid;
+      place-items: center;
+      gap: 12px;
+    }
+
+    .company-logo {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: min(560px, 92vw);
+      padding: 20px 42px 24px;
+      border-radius: 34px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.06));
+      border: 1px solid rgba(255, 255, 255, 0.26);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.30),
+        0 28px 80px rgba(0, 0, 0, 0.22),
+        0 0 70px rgba(56, 189, 248, 0.20);
+      backdrop-filter: blur(18px);
+      font-family: Arial, "Tahoma", sans-serif;
+      font-size: clamp(54px, 10vw, 118px);
+      font-weight: 1000;
+      letter-spacing: 4px;
+      line-height: 1;
+      text-transform: uppercase;
+      text-shadow: 0 10px 30px rgba(0, 0, 0, 0.22);
+    }
+
+    .company-logo::before {
+      content: "";
+      position: absolute;
+      inset: 10px;
+      border-radius: 26px;
+      border: 1px dashed rgba(255, 255, 255, 0.22);
+      pointer-events: none;
+    }
+
+    .hero-tagline {
+      margin-top: 4px;
+      font-size: clamp(20px, 3vw, 34px);
+      font-weight: 1000;
+      letter-spacing: -0.4px;
+      color: #ffffff;
+    }
+
+    .hero-since {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: rgba(255, 255, 255, 0.74);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      backdrop-filter: blur(10px);
     }
 
     .container {
@@ -140,7 +211,7 @@
       padding: 15px 18px;
       font-size: 15px;
       outline: none;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
       transition: 0.25s;
     }
 
@@ -153,31 +224,57 @@
 
     .portal-intro {
       text-align: center;
-      margin: 0 auto 22px;
-      padding: 10px 12px;
+      margin: 0 auto 26px;
+      padding: 0;
     }
 
-    .portal-intro h2 {
-      font-size: clamp(24px, 3vw, 38px);
-      color: var(--blue-950);
-      margin-bottom: 8px;
-      letter-spacing: -0.7px;
+    .home-dashboard {
+      position: relative;
+      padding: 22px;
+      border-radius: 38px;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.82), rgba(239, 246, 255, 0.58));
+      border: 1px solid rgba(219, 234, 254, 0.96);
+      box-shadow: 0 28px 90px rgba(15, 23, 42, 0.12);
+      backdrop-filter: blur(18px);
+      overflow: hidden;
     }
 
-    .portal-intro p {
-      color: var(--muted);
-      font-weight: 800;
+    .home-dashboard::before {
+      content: "";
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      right: -130px;
+      top: -150px;
+      border-radius: 50%;
+      background: rgba(59, 130, 246, 0.12);
+      pointer-events: none;
+    }
+
+    .home-dashboard::after {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      left: -120px;
+      bottom: -150px;
+      border-radius: 50%;
+      background: rgba(124, 58, 237, 0.10);
+      pointer-events: none;
     }
 
     .portal-cards {
+      position: relative;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-      margin-bottom: 28px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      margin-bottom: 0;
+      z-index: 1;
     }
 
     .portal-card {
-      min-height: 310px;
+      min-height: 300px;
       border: 0;
       cursor: pointer;
       position: relative;
@@ -187,8 +284,13 @@
       color: #fff;
       text-align: right;
       box-shadow: 0 30px 80px rgba(15, 23, 42, 0.20);
-      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      transition: transform 0.35s ease, box-shadow 0.35s ease, filter 0.35s ease;
       isolation: isolate;
+    }
+
+    .portal-card:nth-child(1),
+    .portal-card:nth-child(2) {
+      min-height: 340px;
     }
 
     .portal-card::before {
@@ -196,7 +298,7 @@
       position: absolute;
       inset: 1px;
       border-radius: 33px;
-      border: 1px solid rgba(255,255,255,0.28);
+      border: 1px solid rgba(255, 255, 255, 0.28);
       pointer-events: none;
       z-index: 2;
     }
@@ -204,19 +306,20 @@
     .portal-card::after {
       content: "";
       position: absolute;
-      width: 240px;
-      height: 240px;
-      left: -70px;
-      bottom: -80px;
+      width: 260px;
+      height: 260px;
+      left: -90px;
+      bottom: -110px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.16);
+      background: rgba(255, 255, 255, 0.16);
       filter: blur(1px);
       z-index: -1;
     }
 
     .portal-card:hover {
-      transform: translateY(-10px) scale(1.015);
-      box-shadow: 0 38px 100px rgba(15, 23, 42, 0.30);
+      transform: translateY(-12px) scale(1.018);
+      box-shadow: 0 42px 110px rgba(15, 23, 42, 0.32);
+      filter: saturate(1.08);
     }
 
     .portal-card .portal-label {
@@ -224,30 +327,34 @@
       align-items: center;
       gap: 8px;
       padding: 9px 13px;
-      background: rgba(255,255,255,0.16);
-      border: 1px solid rgba(255,255,255,0.22);
+      background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.22);
       border-radius: 999px;
       font-weight: 900;
       font-size: 13px;
       backdrop-filter: blur(10px);
       margin-bottom: 18px;
-    }
-
-    .portal-card h2 {
-      font-size: clamp(26px, 3vw, 40px);
-      line-height: 1.22;
-      margin-bottom: 12px;
       position: relative;
       z-index: 3;
     }
 
+    .portal-card h2 {
+      font-size: clamp(26px, 3vw, 42px);
+      line-height: 1.18;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 3;
+      letter-spacing: -0.6px;
+    }
+
     .portal-card p {
-      color: rgba(255,255,255,0.86);
+      color: rgba(255, 255, 255, 0.84);
       font-weight: 800;
       line-height: 1.8;
       max-width: 310px;
       position: relative;
       z-index: 3;
+      font-size: 14px;
     }
 
     .portal-meta {
@@ -267,8 +374,8 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      background: rgba(255,255,255,0.18);
-      border: 1px solid rgba(255,255,255,0.26);
+      background: rgba(255, 255, 255, 0.20);
+      border: 1px solid rgba(255, 255, 255, 0.28);
       border-radius: 14px;
       backdrop-filter: blur(12px);
     }
@@ -282,19 +389,25 @@
       display: grid;
       place-items: center;
       z-index: 1;
+      transform: rotate(-4deg);
+      transition: 0.35s ease;
+    }
+
+    .portal-card:hover .portal-icon {
+      transform: rotate(0deg) scale(1.06);
     }
 
     .facebook-card {
       background:
-        radial-gradient(circle at 18% 18%, rgba(255,255,255,0.28), transparent 34%),
+        radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.28), transparent 34%),
         linear-gradient(135deg, #0b4fd8, #1877f2 55%, #72b6ff);
       border-radius: 38px;
     }
 
     .facebook-card .portal-icon {
       border-radius: 34px;
-      background: rgba(255,255,255,0.18);
-      box-shadow: inset 0 0 0 2px rgba(255,255,255,0.22), 0 18px 40px rgba(0,0,0,0.16);
+      background: rgba(255, 255, 255, 0.18);
+      box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.22), 0 18px 40px rgba(0, 0, 0, 0.16);
       font-size: 122px;
       font-family: Arial, sans-serif;
       font-weight: 900;
@@ -304,7 +417,7 @@
 
     .youtube-card {
       background:
-        radial-gradient(circle at 18% 18%, rgba(255,255,255,0.24), transparent 34%),
+        radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.24), transparent 34%),
         linear-gradient(135deg, #7f0000, #ff0033 54%, #ff7a7a);
     }
 
@@ -312,8 +425,8 @@
       width: 160px;
       height: 112px;
       border-radius: 32px;
-      background: rgba(255,255,255,0.18);
-      box-shadow: inset 0 0 0 2px rgba(255,255,255,0.22), 0 18px 40px rgba(0,0,0,0.16);
+      background: rgba(255, 255, 255, 0.18);
+      box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.22), 0 18px 40px rgba(0, 0, 0, 0.16);
     }
 
     .youtube-card .portal-icon::before {
@@ -328,7 +441,7 @@
 
     .studio-card {
       background:
-        radial-gradient(circle at 20% 15%, rgba(255,255,255,0.28), transparent 32%),
+        radial-gradient(circle at 20% 15%, rgba(255, 255, 255, 0.28), transparent 32%),
         linear-gradient(135deg, #111827, #334155 55%, #38bdf8);
     }
 
@@ -336,8 +449,8 @@
       width: 150px;
       height: 118px;
       border-radius: 24px;
-      background: rgba(255,255,255,0.14);
-      box-shadow: inset 0 0 0 2px rgba(255,255,255,0.22), 0 18px 40px rgba(0,0,0,0.18);
+      background: rgba(255, 255, 255, 0.14);
+      box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.22), 0 18px 40px rgba(0, 0, 0, 0.18);
     }
 
     .studio-card .portal-icon::before {
@@ -349,7 +462,7 @@
       right: 20px;
       border-radius: 14px;
       background: #fff;
-      box-shadow: 0 -32px 0 -14px rgba(255,255,255,0.88);
+      box-shadow: 0 -32px 0 -14px rgba(255, 255, 255, 0.88);
     }
 
     .studio-card .portal-icon::after {
@@ -363,6 +476,105 @@
       right: 47px;
       background: #38bdf8;
       box-shadow: -58px -22px 0 -8px #fff;
+    }
+
+
+
+    .individual-services-card {
+      background:
+        radial-gradient(circle at 20% 15%, rgba(255, 255, 255, 0.30), transparent 32%),
+        linear-gradient(135deg, #4c1d95, #7c3aed 55%, #38bdf8);
+    }
+
+    .individual-services-card .portal-icon {
+      width: 138px;
+      height: 138px;
+      border-radius: 34px;
+      background: rgba(255, 255, 255, 0.16);
+      box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.22), 0 18px 40px rgba(0, 0, 0, 0.16);
+    }
+
+    .individual-services-card .portal-icon::before {
+      content: "خدمة";
+      position: absolute;
+      width: 88px;
+      height: 88px;
+      display: grid;
+      place-items: center;
+      border-radius: 24px;
+      background: #fff;
+      color: #6d28d9;
+      font-weight: 900;
+      font-size: 22px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16);
+    }
+
+    .services-summary {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 850px) {
+      .services-summary {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .service-stat-card {
+      background: linear-gradient(180deg, #ffffff, var(--blue-50));
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 18px;
+      box-shadow: 0 14px 34px rgba(37, 99, 235, 0.08);
+    }
+
+    .service-stat-card span {
+      display: block;
+      color: var(--muted);
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .service-stat-card strong {
+      font-size: 28px;
+      color: var(--blue-950);
+    }
+
+    .service-status {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 11px;
+      border-radius: 999px;
+      font-weight: 900;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .service-pending {
+      background: #fff7ed;
+      color: #9a3412;
+      border: 1px solid #fdba74;
+    }
+
+    .service-working {
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #93c5fd;
+    }
+
+    .service-done {
+      background: #f0fdf4;
+      color: #15803d;
+      border: 1px solid #86efac;
+    }
+
+    .services-table-wrapper {
+      overflow: auto;
+      margin-top: 18px;
+      border-radius: 20px;
     }
 
     .view-section {
@@ -390,7 +602,7 @@
       font-weight: 900;
       color: #fff;
       background: linear-gradient(135deg, var(--blue-950), var(--blue-700));
-      box-shadow: 0 14px 28px rgba(15,23,42,0.16);
+      box-shadow: 0 14px 28px rgba(15, 23, 42, 0.16);
       transition: 0.25s;
     }
 
@@ -399,17 +611,37 @@
     }
 
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(18px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    @media (max-width: 1050px) {
+    @media (max-width: 1150px) {
+      .portal-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 700px) {
       .portal-cards {
         grid-template-columns: 1fr;
       }
 
-      .portal-card {
-        min-height: 250px;
+      .portal-card,
+      .portal-card:nth-child(1),
+      .portal-card:nth-child(2) {
+        min-height: 255px;
+      }
+
+      .home-dashboard {
+        padding: 14px;
+        border-radius: 28px;
       }
     }
 
@@ -491,7 +723,7 @@
       font-size: 13px;
       font-weight: 900;
       border: 1px solid var(--line);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.9);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
     }
 
     .package-buttons {
@@ -520,7 +752,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.45), transparent);
+      background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.45), transparent);
       transform: translateX(120%);
       transition: 0.45s;
     }
@@ -576,7 +808,7 @@
 
     .teacher-card {
       background:
-        linear-gradient(135deg, rgba(255,255,255,0.96), rgba(239,246,255,0.78)),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(239, 246, 255, 0.78)),
         radial-gradient(circle at top left, rgba(37, 99, 235, 0.14), transparent 40%);
       border: 1px solid rgba(191, 219, 254, 0.95);
       border-radius: 24px;
@@ -649,7 +881,7 @@
       border-radius: 999px;
       overflow: hidden;
       flex: 1;
-      box-shadow: inset 0 1px 2px rgba(15,23,42,0.10);
+      box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.10);
     }
 
     .progress-mini span {
@@ -664,7 +896,7 @@
       position: fixed;
       inset: 0;
       background:
-        radial-gradient(circle at 20% 15%, rgba(37,99,235,0.28), transparent 28%),
+        radial-gradient(circle at 20% 15%, rgba(37, 99, 235, 0.28), transparent 28%),
         rgba(7, 17, 31, 0.72);
       display: none;
       align-items: center;
@@ -685,8 +917,8 @@
       overflow: auto;
       border-radius: 30px;
       padding: 26px;
-      box-shadow: 0 40px 100px rgba(0,0,0,0.34);
-      border: 1px solid rgba(219,234,254,0.95);
+      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.34);
+      border: 1px solid rgba(219, 234, 254, 0.95);
     }
 
     .modal-header {
@@ -697,11 +929,11 @@
       margin-bottom: 20px;
       position: sticky;
       top: 0;
-      background: rgba(255,255,255,0.92);
+      background: rgba(255, 255, 255, 0.92);
       padding-bottom: 14px;
       z-index: 2;
       backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(219,234,254,0.8);
+      border-bottom: 1px solid rgba(219, 234, 254, 0.8);
     }
 
     .modal-header h2 {
@@ -754,7 +986,7 @@
       padding: 13px 14px;
       outline: none;
       font-size: 14px;
-      background: rgba(255,255,255,0.92);
+      background: rgba(255, 255, 255, 0.92);
       transition: 0.25s;
     }
 
@@ -791,7 +1023,7 @@
     .timeline-panel,
     .progress-box {
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.95), rgba(239,246,255,0.72));
+        linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(239, 246, 255, 0.72));
       border: 1px solid rgba(191, 219, 254, 0.95);
       border-radius: 24px;
       padding: 20px;
@@ -819,7 +1051,7 @@
       border-radius: 999px;
       overflow: hidden;
       margin: 12px 0;
-      box-shadow: inset 0 2px 5px rgba(15,23,42,0.10);
+      box-shadow: inset 0 2px 5px rgba(15, 23, 42, 0.10);
     }
 
     .progress-fill {
@@ -835,9 +1067,17 @@
       font-size: 15px;
     }
 
-    .status-good { color: var(--green); }
-    .status-late { color: var(--red); }
-    .status-warn { color: var(--orange); }
+    .status-good {
+      color: var(--green);
+    }
+
+    .status-late {
+      color: var(--red);
+    }
+
+    .status-warn {
+      color: var(--orange);
+    }
 
     table {
       width: 100%;
@@ -846,7 +1086,7 @@
       border-radius: 20px;
       overflow: hidden;
       box-shadow: 0 14px 36px rgba(37, 99, 235, 0.10);
-      border: 1px solid rgba(219,234,254,0.9);
+      border: 1px solid rgba(219, 234, 254, 0.9);
     }
 
     th,
@@ -917,8 +1157,8 @@
       gap: 10px;
       margin: 16px 0;
       padding: 10px;
-      background: rgba(239,246,255,0.75);
-      border: 1px solid rgba(219,234,254,0.95);
+      background: rgba(239, 246, 255, 0.75);
+      border: 1px solid rgba(219, 234, 254, 0.95);
       border-radius: 22px;
     }
 
@@ -931,7 +1171,7 @@
       cursor: pointer;
       font-weight: 900;
       transition: 0.25s;
-      box-shadow: 0 8px 18px rgba(37,99,235,0.08);
+      box-shadow: 0 8px 18px rgba(37, 99, 235, 0.08);
     }
 
     .task-type-btn:hover {
@@ -943,13 +1183,13 @@
       background: linear-gradient(135deg, var(--blue-800), var(--blue-500));
       color: #fff;
       border-color: var(--blue-500);
-      box-shadow: 0 16px 30px rgba(37,99,235,0.26);
+      box-shadow: 0 16px 30px rgba(37, 99, 235, 0.26);
     }
 
     .task-type-title {
       background:
-        linear-gradient(135deg, rgba(255,255,255,0.98), rgba(239,246,255,0.84));
-      border: 1px solid rgba(191,219,254,0.95);
+        linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(239, 246, 255, 0.84));
+      border: 1px solid rgba(191, 219, 254, 0.95);
       padding: 15px 16px;
       border-radius: 20px;
       margin: 10px 0 14px;
@@ -980,8 +1220,8 @@
       gap: 10px;
       margin: 14px 0 18px;
       padding: 10px;
-      background: rgba(239,246,255,0.75);
-      border: 1px solid rgba(219,234,254,0.95);
+      background: rgba(239, 246, 255, 0.75);
+      border: 1px solid rgba(219, 234, 254, 0.95);
       border-radius: 22px;
     }
 
@@ -994,7 +1234,7 @@
       cursor: pointer;
       font-weight: 900;
       transition: 0.25s;
-      box-shadow: 0 8px 18px rgba(37,99,235,0.08);
+      box-shadow: 0 8px 18px rgba(37, 99, 235, 0.08);
     }
 
     .studio-btn:hover {
@@ -1006,7 +1246,7 @@
       background: linear-gradient(135deg, var(--blue-800), var(--blue-500));
       color: #fff;
       border-color: var(--blue-500);
-      box-shadow: 0 16px 30px rgba(37,99,235,0.26);
+      box-shadow: 0 16px 30px rgba(37, 99, 235, 0.26);
     }
 
     .timeline-table td.scheduled-cell {
@@ -1022,12 +1262,12 @@
 
     .timeline-table-wrapper {
       overflow: auto;
-      background: rgba(255,255,255,0.9);
+      background: rgba(255, 255, 255, 0.9);
       border-radius: 24px;
       padding: 14px;
       box-shadow: 0 18px 44px rgba(37, 99, 235, 0.11);
       margin-top: 24px;
-      border: 1px solid rgba(219,234,254,0.95);
+      border: 1px solid rgba(219, 234, 254, 0.95);
     }
 
     .timeline-table {
@@ -1068,7 +1308,7 @@
 
     .timeline-input:focus {
       background: #fff;
-      box-shadow: 0 0 0 3px rgba(59,130,246,0.10) !important;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.10) !important;
     }
 
     .empty-state {
@@ -1101,7 +1341,7 @@
       border-radius: 18px;
       padding: 13px;
       text-align: center;
-      box-shadow: 0 8px 18px rgba(37,99,235,0.06);
+      box-shadow: 0 8px 18px rgba(37, 99, 235, 0.06);
     }
 
     .week-card strong {
@@ -1145,11 +1385,661 @@
         font-size: 13px;
       }
     }
+
+
+    /* ===== EDUBE Purple Home Refresh ===== */
+    :root {
+      --blue-950: #120022;
+      --blue-900: #1c0038;
+      --blue-800: #3b006f;
+      --blue-700: #6d00c9;
+      --blue-600: #9900ff;
+      --blue-500: #d000ff;
+      --blue-100: #f0d7ff;
+      --blue-50: #fbf2ff;
+      --white: #ffffff;
+      --soft: #fff8ff;
+      --line: rgba(210, 0, 255, 0.22);
+      --text: #23102f;
+      --muted: #7c5a8c;
+      --green: #19b86a;
+      --orange: #f59e0b;
+      --red: #ef4444;
+      --shadow: 0 24px 70px rgba(52, 0, 88, 0.16);
+      --soft-shadow: 0 16px 44px rgba(153, 0, 255, 0.14);
+    }
+
+    body {
+      background:
+        radial-gradient(circle at 10% 12%, rgba(208, 0, 255, 0.18), transparent 24%),
+        radial-gradient(circle at 88% 4%, rgba(153, 0, 255, 0.22), transparent 28%),
+        radial-gradient(circle at 50% 110%, rgba(63, 0, 105, 0.12), transparent 36%),
+        linear-gradient(180deg, #170026 0%, #2a0047 34%, #f8ecff 34%, #ffffff 100%);
+    }
+
+    body::before {
+      background-image:
+        linear-gradient(rgba(208, 0, 255, 0.065) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(208, 0, 255, 0.065) 1px, transparent 1px);
+      background-size: 38px 38px;
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.75), transparent 72%);
+    }
+
+    header {
+      min-height: 150px;
+      padding: 22px 24px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background:
+        radial-gradient(circle at 16% 50%, rgba(208, 0, 255, 0.34), transparent 22%),
+        radial-gradient(circle at 84% 10%, rgba(153, 0, 255, 0.42), transparent 26%),
+        linear-gradient(90deg, #170026 0%, #30005f 48%, #7300b8 100%);
+      box-shadow: 0 18px 52px rgba(41, 0, 70, 0.34);
+    }
+
+    header::before {
+      width: 190px;
+      height: 190px;
+      right: -70px;
+      top: -100px;
+      background: rgba(208, 0, 255, 0.22);
+      box-shadow: 0 0 0 24px rgba(208, 0, 255, 0.055);
+    }
+
+    header::after {
+      width: 240px;
+      height: 240px;
+      left: -85px;
+      bottom: -150px;
+      background: rgba(153, 0, 255, 0.23);
+      filter: blur(1px);
+    }
+
+    .hero-pattern {
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+      background-size: 34px 34px;
+      mask-image: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.95) 20%, rgba(0, 0, 0, 0.95) 80%, transparent);
+    }
+
+    .brand-hero {
+      gap: 4px;
+      width: min(980px, 94vw);
+      padding: 10px 22px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 26px;
+      background: rgba(255, 255, 255, 0.055);
+      backdrop-filter: blur(12px);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 18px 48px rgba(0, 0, 0, 0.22);
+    }
+
+    .company-logo {
+      min-width: auto;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+      backdrop-filter: none;
+      font-size: clamp(42px, 7vw, 82px);
+      letter-spacing: 3px;
+      color: #fff;
+      text-shadow: 0 0 26px rgba(208, 0, 255, 0.55), 0 10px 30px rgba(0, 0, 0, 0.32);
+    }
+
+    .company-logo::before {
+      display: none;
+    }
+
+    .company-logo::after {
+      content: "Marketing Agency";
+      display: block;
+      margin-top: -4px;
+      font-size: clamp(13px, 2vw, 22px);
+      letter-spacing: 3px;
+      font-weight: 900;
+      text-transform: none;
+      color: rgba(255, 255, 255, 0.86);
+      text-align: center;
+    }
+
+    .hero-tagline {
+      margin-top: 3px;
+      font-size: clamp(15px, 2vw, 23px);
+      color: #ffffff;
+      text-shadow: 0 0 18px rgba(208, 0, 255, 0.60);
+    }
+
+    .hero-since {
+      padding: 2px 0 0;
+      background: transparent;
+      border: 0;
+      color: rgba(255, 255, 255, 0.64);
+      font-size: 11px;
+      letter-spacing: 2px;
+      backdrop-filter: none;
+    }
+
+    .container {
+      width: min(1180px, 94%);
+      margin: 28px auto 36px;
+    }
+
+    .home-dashboard {
+      padding: 18px;
+      border-radius: 34px;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.86), rgba(251, 242, 255, 0.74)),
+        radial-gradient(circle at 0% 0%, rgba(208, 0, 255, 0.18), transparent 30%),
+        radial-gradient(circle at 100% 100%, rgba(111, 0, 201, 0.16), transparent 34%);
+      border: 1px solid rgba(208, 0, 255, 0.18);
+      box-shadow: 0 24px 70px rgba(52, 0, 88, 0.14);
+      backdrop-filter: blur(18px);
+    }
+
+    .home-dashboard::before {
+      background: rgba(208, 0, 255, 0.12);
+    }
+
+    .home-dashboard::after {
+      background: rgba(111, 0, 201, 0.11);
+    }
+
+    .portal-cards {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .portal-card,
+    .portal-card:nth-child(1),
+    .portal-card:nth-child(2) {
+      min-height: 245px;
+      border-radius: 30px;
+      padding: 26px;
+      box-shadow: 0 26px 70px rgba(44, 0, 75, 0.22);
+    }
+
+    .portal-card::before {
+      border-color: rgba(255, 255, 255, 0.24);
+      border-radius: 29px;
+    }
+
+    .portal-card::after {
+      width: 260px;
+      height: 260px;
+      left: -105px;
+      bottom: -120px;
+      background: rgba(255, 255, 255, 0.13);
+    }
+
+    .portal-card .portal-label,
+    .portal-count {
+      background: rgba(255, 255, 255, 0.14);
+      border-color: rgba(255, 255, 255, 0.24);
+    }
+
+    .portal-card h2 {
+      font-size: clamp(28px, 3.4vw, 46px);
+      text-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
+    }
+
+    .portal-card p {
+      max-width: 380px;
+      color: rgba(255, 255, 255, 0.84);
+    }
+
+    .portal-icon {
+      left: 24px;
+      bottom: 22px;
+      opacity: 0.86;
+    }
+
+    .facebook-card,
+    .youtube-card,
+    .individual-services-card,
+    .studio-card {
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.03)),
+        radial-gradient(circle at 18% 22%, rgba(208, 0, 255, 0.48), transparent 34%),
+        radial-gradient(circle at 92% 0%, rgba(255, 255, 255, 0.16), transparent 26%),
+        linear-gradient(135deg, #160026 0%, #3a006b 48%, #9b00ff 100%);
+    }
+
+    .youtube-card {
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.03)),
+        radial-gradient(circle at 18% 22%, rgba(208, 0, 255, 0.54), transparent 34%),
+        linear-gradient(135deg, #1a002f 0%, #52008e 48%, #d000ff 100%);
+    }
+
+    .individual-services-card {
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.03)),
+        radial-gradient(circle at 22% 20%, rgba(255, 0, 220, 0.44), transparent 32%),
+        linear-gradient(135deg, #170026 0%, #420071 50%, #a100ff 100%);
+    }
+
+    .studio-card {
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.03)),
+        radial-gradient(circle at 20% 18%, rgba(180, 0, 255, 0.42), transparent 34%),
+        linear-gradient(135deg, #10001f 0%, #30005e 52%, #7b00d4 100%);
+    }
+
+    .btn-primary,
+    .task-type-btn.active,
+    .studio-btn.active {
+      background: linear-gradient(135deg, #6800b8, #d000ff);
+      box-shadow: 0 16px 32px rgba(153, 0, 255, 0.24);
+    }
+
+    .btn-dark,
+    .back-btn,
+    th {
+      background: linear-gradient(135deg, #160026, #5f00aa) !important;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus,
+    .search-box:focus {
+      border-color: #d000ff;
+      box-shadow: 0 0 0 4px rgba(208, 0, 255, 0.13);
+    }
+
+    .section::before {
+      background: linear-gradient(90deg, #160026, #9900ff, #d000ff);
+    }
+
+    .progress-fill,
+    .progress-mini span {
+      background: linear-gradient(90deg, #3b006f, #9900ff, #d000ff);
+    }
+
+    @media (max-width: 820px) {
+      .portal-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .portal-card,
+      .portal-card:nth-child(1),
+      .portal-card:nth-child(2) {
+        min-height: 230px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      header {
+        min-height: 132px;
+        padding: 18px 14px 22px;
+      }
+
+      .brand-hero {
+        border-radius: 22px;
+        padding: 9px 14px;
+      }
+
+      .container {
+        margin-top: 20px;
+      }
+    }
+
+
+    /* ===== Final home refinements ===== */
+    .company-logo::after {
+      display: none !important;
+    }
+
+    .hero-subbrand {
+      margin-top: -2px;
+      font-size: clamp(12px, 1.9vw, 18px);
+      font-weight: 800;
+      letter-spacing: 2.8px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.82);
+      text-align: center;
+    }
+
+    .hero-tagline {
+      margin-top: 2px;
+    }
+
+    .hero-socials {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 8px;
+      direction: ltr;
+    }
+
+    .hero-social {
+      width: 42px;
+      height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: #fff;
+      font-size: 21px;
+      font-weight: 900;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.06));
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 10px 24px rgba(0, 0, 0, 0.20);
+      backdrop-filter: blur(8px);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    }
+
+    .hero-social:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 14px 28px rgba(176, 0, 255, 0.28);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(208, 0, 255, 0.20));
+    }
+
+    .hero-social-drive {
+      font-size: 18px;
+    }
+
+    .home-dashboard {
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(16, 0, 31, 0.78), rgba(58, 0, 107, 0.60) 55%, rgba(155, 0, 255, 0.36)),
+        rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 28px 90px rgba(44, 0, 75, 0.24);
+    }
+
+    .home-dashboard::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+      background-size: 34px 34px;
+      opacity: 0.55;
+      pointer-events: none;
+    }
+
+    .home-dashboard::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(224, 140, 255, 0.10), transparent 34%);
+      pointer-events: none;
+    }
+
+    .dashboard-decor {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .decor-megaphone {
+      position: absolute;
+      font-size: clamp(60px, 8vw, 120px);
+      color: rgba(255, 255, 255, 0.08);
+      filter: blur(0.2px);
+      user-select: none;
+      transform: rotate(-16deg);
+    }
+
+    .megaphone-1 {
+      top: 26px;
+      right: 36px;
+    }
+
+    .megaphone-2 {
+      bottom: 38px;
+      left: 56px;
+      transform: rotate(12deg);
+    }
+
+    .megaphone-3 {
+      top: 50%;
+      left: 44%;
+      transform: translate(-50%, -50%) rotate(-10deg);
+      font-size: clamp(90px, 10vw, 150px);
+    }
+
+    .portal-cards {
+      position: relative;
+      z-index: 1;
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+
+    .portal-card .portal-label,
+    .portal-card p {
+      display: none !important;
+    }
+
+    .portal-card,
+    .portal-card:nth-child(1),
+    .portal-card:nth-child(2) {
+      min-height: 210px;
+    }
+
+    .portal-card h2 {
+      margin-bottom: 0;
+      max-width: 74%;
+      font-size: clamp(24px, 2.6vw, 36px);
+    }
+
+    .portal-meta {
+      bottom: 18px;
+    }
+
+    @media (max-width: 820px) {
+      .portal-cards {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .hero-social {
+        width: 38px;
+        height: 38px;
+        font-size: 18px;
+      }
+
+      .portal-card h2 {
+        max-width: 72%;
+      }
+    }
+
+
+    /* ===== Motivational strip ===== */
+    .motivation-strip {
+      position: fixed;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 210px;
+      min-height: 132px;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 18px 16px;
+      border-radius: 26px;
+      color: #fff;
+      text-align: center;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.045)),
+        radial-gradient(circle at 22% 14%, rgba(208, 0, 255, 0.58), transparent 38%),
+        linear-gradient(135deg, rgba(22, 0, 38, 0.90), rgba(80, 0, 142, 0.82));
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 22px 60px rgba(44, 0, 75, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(14px);
+      overflow: hidden;
+    }
+
+    .motivation-strip::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+      background-size: 22px 22px;
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    .motivation-strip::after {
+      content: "";
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      left: -54px;
+      bottom: -60px;
+      border-radius: 50%;
+      background: rgba(208, 0, 255, 0.20);
+      pointer-events: none;
+    }
+
+    .motivation-icon {
+      position: relative;
+      z-index: 1;
+      width: 42px;
+      height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.13);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 0 24px rgba(208, 0, 255, 0.32);
+      font-size: 22px;
+    }
+
+    .motivation-strip p {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      font-size: 14px;
+      font-weight: 900;
+      line-height: 1.75;
+      text-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+
+    .motivation-strip p.changing {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+
+    .services-summary {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 1180px) {
+      .motivation-strip {
+        left: 12px;
+        width: 180px;
+        padding: 14px 12px;
+      }
+
+      .motivation-strip p {
+        font-size: 13px;
+      }
+    }
+
+    @media (max-width: 820px) {
+      .motivation-strip {
+        position: sticky;
+        top: 10px;
+        left: auto;
+        transform: none;
+        width: min(94%, 520px);
+        min-height: auto;
+        margin: 10px auto 0;
+        flex-direction: row;
+        border-radius: 20px;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .services-summary {
+        grid-template-columns: 1fr;
+      }
+    }
+
+
+    /* ===== Motivational strip inside hero ===== */
+    header .motivation-strip {
+      position: relative !important;
+      left: auto !important;
+      top: auto !important;
+      transform: none !important;
+      width: min(720px, 92vw) !important;
+      min-height: auto !important;
+      z-index: 3 !important;
+      margin: 16px auto 0 !important;
+      padding: 12px 18px !important;
+      flex-direction: row !important;
+      border-radius: 999px !important;
+      gap: 12px !important;
+    }
+
+    header .motivation-icon {
+      flex: 0 0 38px;
+      width: 38px;
+      height: 38px;
+      font-size: 20px;
+    }
+
+    header .motivation-strip p {
+      flex: 1;
+      font-size: clamp(13px, 1.7vw, 16px);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 560px) {
+      header .motivation-strip {
+        width: min(94%, 520px) !important;
+        padding: 10px 12px !important;
+        border-radius: 22px !important;
+      }
+
+      header .motivation-icon {
+        width: 34px;
+        height: 34px;
+        font-size: 18px;
+      }
+    }
   </style>
 </head>
+
 <body>
   <header>
-    <h1>إدارة الباكدجات التسويقية للمدرسين</h1>
+    <div class="hero-pattern"></div>
+    <div class="brand-hero" aria-label="شعار الشركة">
+      <div class="company-logo">EDUBE</div>
+      <div class="hero-subbrand">Marketing Agency</div>
+      <div class="hero-tagline">إبداع - سرعة - نتائج</div>
+      <div class="hero-since">since 2023</div>
+      <div class="hero-socials" aria-label="روابط الشركة">
+        <a class="hero-social" href="https://www.facebook.com/profile.php?id=100090460140547&locale=ar_AR"
+          target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook">f</a>
+        <a class="hero-social" href="https://www.tiktok.com/@edube.agency?is_from_webapp=1&sender_device=pc"
+          target="_blank" rel="noopener noreferrer" aria-label="TikTok" title="TikTok">♪</a>
+        <a class="hero-social hero-social-drive"
+          href="https://drive.google.com/drive/folders/1Pxq5eFUvDeQVFrn4jUiyHxnUWzZbinaD?usp=drive_link" target="_blank"
+          rel="noopener noreferrer" aria-label="Google Drive" title="Google Drive">△</a>
+      </div>
+    </div>
+    <aside class="motivation-strip" aria-live="polite" aria-label="رسالة تحفيزية">
+      <span class="motivation-icon">📣</span>
+      <p id="motivationText">بسم الله نبدأ، وبالإخلاص ننجز.</p>
+    </aside>
   </header>
 
   <main class="container">
@@ -1157,27 +2047,50 @@
       <div class="portal-intro">
       </div>
 
-      <div class="portal-cards">
-        <button class="portal-card facebook-card" onclick="openView('facebookView')" aria-label="فتح باكدجات الفيس بوك">
-          <span class="portal-label">قسم الباكدجات</span>
-          <h2>باكدجات  <br>الفيس بوك</h2>
-          <div class="portal-icon">f</div>
-          <div class="portal-meta"><span class="portal-count" id="portalFacebookCount">0</span><span>باكدج مضافة</span></div>
-        </button>
+      <div class="home-dashboard">
+        <div class="dashboard-decor" aria-hidden="true">
+          <span class="decor-megaphone megaphone-1">📣</span>
+          <span class="decor-megaphone megaphone-2">📣</span>
+          <span class="decor-megaphone megaphone-3">📣</span>
+        </div>
+        <div class="portal-cards">
+          <button class="portal-card facebook-card" onclick="openView('facebookView')"
+            aria-label="فتح باكدجات الفيس بوك">
+            <span class="portal-label">قسم الباكدجات</span>
+            <h2>باكدجات الفيس بوك</h2>
+            <p>تنظيم ومتابعة باكدجات السوشيال للمدرسين.</p>
+            <div class="portal-icon">f</div>
+            <div class="portal-meta"><span class="portal-count" id="portalFacebookCount">0</span><span>باكدج
+                مضافة</span></div>
+          </button>
 
-        <button class="portal-card youtube-card" onclick="openView('youtubeView')" aria-label="فتح باكدجات اليوتيوب">
-          <span class="portal-label">قسم الفيديو</span>
-          <h2>باكدجات   <br>اليوتيوب</h2>
-          <div class="portal-icon"></div>
-          <div class="portal-meta"><span class="portal-count" id="portalYoutubeCount">0</span><span>باكدج مضافة</span></div>
-        </button>
+          <button class="portal-card youtube-card" onclick="openView('youtubeView')" aria-label="فتح باكدجات اليوتيوب">
+            <span class="portal-label">قسم الفيديو</span>
+            <h2>باكدجات اليوتيوب</h2>
+            <p>إدارة التصوير، التصميم، والريلز الخاصة باليوتيوب.</p>
+            <div class="portal-icon"></div>
+            <div class="portal-meta"><span class="portal-count" id="portalYoutubeCount">0</span><span>باكدج مضافة</span>
+            </div>
+          </button>
 
-        <button class="portal-card studio-card" onclick="openView('studiosView')" aria-label="فتح الاستوديوهات">
-          <span class="portal-label">جدول زمني</span>
-          <h2>الاستوديوهات</h2>
-          <div class="portal-icon"></div>
-          <div class="portal-meta"><span class="portal-count">2</span><span>استوديو</span></div>
-        </button>
+          <button class="portal-card individual-services-card" onclick="openView('individualServicesView')"
+            aria-label="فتح قسم الخدمات الفردية">
+            <span class="portal-label">طلبات منفصلة</span>
+            <h2>قسم الخدمات الفردية</h2>
+            <p>إضافة ومتابعة الخدمات المطلوبة خارج الباكدجات.</p>
+            <div class="portal-icon"></div>
+            <div class="portal-meta"><span class="portal-count" id="portalServicesCount">0</span><span>خدمة مضافة</span>
+            </div>
+          </button>
+
+          <button class="portal-card studio-card" onclick="openView('studiosView')" aria-label="فتح الاستوديوهات">
+            <span class="portal-label">جدول زمني</span>
+            <h2>الاستوديوهات</h2>
+            <p>جدول تشغيل الاستوديوهات وتنظيم المواعيد اليومية.</p>
+            <div class="portal-icon"></div>
+            <div class="portal-meta"><span class="portal-count">2</span><span>استوديو</span></div>
+          </button>
+        </div>
       </div>
     </section>
 
@@ -1187,7 +2100,8 @@
       </div>
 
       <div class="top-actions">
-        <input id="searchInput" class="search-box" type="text" placeholder="ابحث باسم المدرس، المادة، المحافظة، أو نوع الباكدج..." oninput="renderAllCards()" />
+        <input id="searchInput" class="search-box" type="text"
+          placeholder="ابحث باسم المدرس، المادة، المحافظة، أو نوع الباكدج..." oninput="renderAllCards()" />
         <button class="btn btn-dark" onclick="resetAllData()">مسح كل البيانات</button>
       </div>
 
@@ -1215,7 +2129,8 @@
       </div>
 
       <div class="top-actions">
-        <input id="youtubeSearchInput" class="search-box" type="text" placeholder="ابحث باسم المدرس، المادة، المحافظة، أو نوع الباكدج..." oninput="syncSearch(this.value)" />
+        <input id="youtubeSearchInput" class="search-box" type="text"
+          placeholder="ابحث باسم المدرس، المادة، المحافظة، أو نوع الباكدج..." oninput="syncSearch(this.value)" />
         <button class="btn btn-dark" onclick="resetAllData()">مسح كل البيانات</button>
       </div>
 
@@ -1237,6 +2152,80 @@
       </div>
     </section>
 
+    <section id="individualServicesView" class="view-section">
+      <div class="back-row">
+        <button class="back-btn" onclick="goHome()">↩ رجوع للأقسام</button>
+      </div>
+
+      <section class="section">
+        <div class="section-header">
+          <div class="section-title">
+            <h2>قسم الخدمات الفردية</h2>
+            <span class="badge" id="servicesCountBadge">0</span>
+          </div>
+        </div>
+
+        <div class="services-summary">
+          <div class="service-stat-card"><span>عدد الخدمات</span><strong id="servicesTotalCount">0</strong></div>
+          <div class="service-stat-card"><span>الخدمات المنتهية</span><strong id="servicesDoneCount">0</strong></div>
+        </div>
+
+        <form id="individualServiceForm" onsubmit="saveIndividualService(event)">
+          <div class="form-grid">
+            <div>
+              <label>اسم الخدمة</label>
+              <input id="serviceName" type="text" required placeholder="مثال: تصميم بوستر / مونتاج ريل / غلاف يوتيوب" />
+            </div>
+            <div>
+              <label>مين طالبها</label>
+              <input id="serviceRequester" type="text" required placeholder="اسم العميل أو المدرس" />
+            </div>
+            <div>
+              <label>التاريخ</label>
+              <input id="serviceDate" type="date" required />
+            </div>
+            <div>
+              <label>الحالة</label>
+              <select id="serviceStatus" required>
+                <option value="pending">لم تبدأ</option>
+                <option value="working">قيد التنفيذ</option>
+                <option value="done">تم الانتهاء</option>
+              </select>
+            </div>
+            <div>
+              <label>تاريخ التسليم</label>
+              <input id="serviceDeliveryDate" type="date" />
+            </div>
+            <div class="full">
+              <label>تفاصيل الخدمة</label>
+              <textarea id="serviceDetails"
+                placeholder="اكتب تفاصيل الخدمة، المقاسات، المطلوب، ملاحظات العميل..."></textarea>
+            </div>
+            <div class="full">
+              <button class="btn btn-primary" type="submit">حفظ الخدمة الفردية</button>
+            </div>
+          </div>
+        </form>
+
+        <div class="services-table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>الخدمة</th>
+                <th>طالب الخدمة</th>
+                <th>التاريخ</th>
+                <th>الحالة</th>
+                <th>تاريخ التسليم</th>
+                <th>التفاصيل</th>
+                <th>إجراء</th>
+              </tr>
+            </thead>
+            <tbody id="individualServicesTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+
     <section id="studiosView" class="view-section">
       <div class="back-row">
         <button class="back-btn" onclick="goHome()">↩ رجوع للأقسام</button>
@@ -1249,9 +2238,11 @@
             <span class="badge">8 صباحاً - 2 صباحاً</span>
           </div>
         </div>
-        <p style="color:#6b7280; margin-bottom: 12px;">اختار الاستوديو من الأزرار، واكتب المعاد أو المهمة داخل الخانة. أي خانة يتم تحديدها ستظهر بلون مختلف تلقائياً.</p>
+        <p style="color:#6b7280; margin-bottom: 12px;">اختار الاستوديو من الأزرار، واكتب المعاد أو المهمة داخل الخانة.
+          أي خانة يتم تحديدها ستظهر بلون مختلف تلقائياً.</p>
         <div class="studio-tabs">
-          <button id="sadatStudioBtn" class="studio-btn active" onclick="switchStudio('sadat')">جدول استوديو السادات</button>
+          <button id="sadatStudioBtn" class="studio-btn active" onclick="switchStudio('sadat')">جدول استوديو
+            السادات</button>
           <button id="shebinStudioBtn" class="studio-btn" onclick="switchStudio('shebin')">جدول استوديو شبين</button>
         </div>
         <div class="timeline-table-wrapper">
@@ -1259,6 +2250,9 @@
         </div>
       </section>
     </section>
+
+
+
   </main>
 
   <div class="modal" id="teacherModal">
@@ -1308,6 +2302,7 @@
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
     const packageTemplates = {
       "face 1": [
@@ -1345,31 +2340,132 @@
     const days = ["السبت", "الأحد", "الاثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة"];
     const hours = ["8 ص", "9 ص", "10 ص", "11 ص", "12 م", "1 م", "2 م", "3 م", "4 م", "5 م", "6 م", "7 م", "8 م", "9 م", "10 م", "11 م", "12 ص", "1 ص", "2 ص"];
 
+    // ===== Supabase Settings =====
+    // 1) أنشئ مشروع Supabase
+    // 2) شغّل ملف database.sql الموجود مع الملف ده في SQL Editor
+    // 3) بدّل القيمتين دول من Project Settings > API
+    const SUPABASE_URL = "https://YOUR_PROJECT_ID.supabase.co";
+    const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
+
+    const APP_STATE_ID = "main";
+    const DEFAULT_STATE = {
+      teachers: [],
+      selectedStudio: "sadat",
+      timelineData: { sadat: {}, shebin: {} },
+      individualServices: []
+    };
+
+    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
     let selectedCategory = "";
     let selectedPackage = "";
     let selectedTeacherId = null;
     let selectedTaskTypeByTeacher = {};
+    let saveTimer = null;
+    let isLoaded = false;
 
-    let teachers = JSON.parse(localStorage.getItem("marketingTeachers")) || [];
-    let selectedStudio = localStorage.getItem("selectedStudio") || "sadat";
-    let timelineData = JSON.parse(localStorage.getItem("dailyTimelineData")) || { sadat: {}, shebin: {} };
+    let teachers = [];
+    let selectedStudio = "sadat";
+    let timelineData = { sadat: {}, shebin: {} };
+    let individualServices = [];
 
-    if (!timelineData.sadat || !timelineData.shebin) {
-      timelineData = {
-        sadat: timelineData || {},
-        shebin: {}
+    function normalizeState(state = {}) {
+      return {
+        teachers: Array.isArray(state.teachers) ? state.teachers : [],
+        selectedStudio: state.selectedStudio || "sadat",
+        timelineData: state.timelineData || { sadat: {}, shebin: {} },
+        individualServices: Array.isArray(state.individualServices) ? state.individualServices : []
       };
+    }
+
+    function applyState(state = {}) {
+      const normalized = normalizeState(state);
+      teachers = normalized.teachers;
+      selectedStudio = normalized.selectedStudio;
+      timelineData = normalized.timelineData;
+      individualServices = normalized.individualServices;
+
+      if (!timelineData.sadat || !timelineData.shebin) {
+        timelineData = {
+          sadat: timelineData.sadat || {},
+          shebin: timelineData.shebin || {}
+        };
+      }
+
+      localStorage.setItem("edubeLastStateBackup", JSON.stringify(getCurrentState()));
+    }
+
+    function getCurrentState() {
+      return {
+        teachers,
+        selectedStudio,
+        timelineData,
+        individualServices
+      };
+    }
+
+    async function loadFromSupabase() {
+      try {
+        const { data, error } = await supabaseClient
+          .from("app_state")
+          .select("data")
+          .eq("id", APP_STATE_ID)
+          .maybeSingle();
+
+        if (error) throw error;
+
+        if (data?.data) {
+          applyState(data.data);
+        } else {
+          applyState(DEFAULT_STATE);
+          await saveToSupabaseNow();
+        }
+      } catch (error) {
+        console.error("Supabase load error:", error);
+        alert("تعذر تحميل البيانات من Supabase. سيتم استخدام آخر نسخة محفوظة على نفس الجهاز مؤقتاً.");
+        const backup = localStorage.getItem("edubeLastStateBackup");
+        applyState(backup ? JSON.parse(backup) : DEFAULT_STATE);
+      } finally {
+        isLoaded = true;
+      }
+    }
+
+    async function saveToSupabaseNow() {
+      if (!SUPABASE_URL.includes("supabase.co") || SUPABASE_ANON_KEY.includes("YOUR_")) {
+        console.warn("Supabase keys are not configured yet.");
+        return;
+      }
+
+      const payload = getCurrentState();
+      localStorage.setItem("edubeLastStateBackup", JSON.stringify(payload));
+
+      const { error } = await supabaseClient
+        .from("app_state")
+        .upsert({
+          id: APP_STATE_ID,
+          data: payload,
+          updated_at: new Date().toISOString()
+        }, { onConflict: "id" });
+
+      if (error) {
+        console.error("Supabase save error:", error);
+        alert("حصل خطأ أثناء حفظ البيانات على Supabase. راجع Console.");
+      }
+    }
+
+    function saveToStorage() {
+      if (!isLoaded) return;
+
+      localStorage.setItem("edubeLastStateBackup", JSON.stringify(getCurrentState()));
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(() => {
+        saveToSupabaseNow();
+      }, 450);
     }
 
     function makeId() {
       if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
       return "id-" + Date.now() + "-" + Math.random().toString(16).slice(2);
-    }
-
-    function saveToStorage() {
-      localStorage.setItem("marketingTeachers", JSON.stringify(teachers));
-      localStorage.setItem("dailyTimelineData", JSON.stringify(timelineData));
-      localStorage.setItem("selectedStudio", selectedStudio);
     }
 
     function openView(viewId) {
@@ -1378,7 +2474,10 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
       renderAllCards();
       renderDailyTimeline();
+      renderIndividualServices();
+      renderIndividualServices();
     }
+
 
     function goHome() {
       document.querySelectorAll(".view-section").forEach(section => section.classList.remove("active"));
@@ -1524,6 +2623,8 @@
       document.getElementById("youtubeCount").textContent = youtubeTotal;
       document.getElementById("portalFacebookCount").textContent = facebookTotal;
       document.getElementById("portalYoutubeCount").textContent = youtubeTotal;
+      const servicesCount = document.getElementById("portalServicesCount");
+      if (servicesCount) servicesCount.textContent = individualServices.length;
     }
 
     function openDetails(id) {
@@ -1611,11 +2712,11 @@
       return `
         <div class="task-type-tabs">
           ${types.map(type => {
-            const total = teacher.tasks.filter(task => task.type === type).length;
-            const done = teacher.tasks.filter(task => task.type === type && task.done).length;
-            const active = selectedTaskTypeByTeacher[teacher.id] === type ? "active" : "";
-            return `<button class="task-type-btn ${active}" onclick="showTaskType('${teacher.id}', '${escapeForOnClick(type)}')">${type} <small>(${done}/${total})</small></button>`;
-          }).join("")}
+        const total = teacher.tasks.filter(task => task.type === type).length;
+        const done = teacher.tasks.filter(task => task.type === type && task.done).length;
+        const active = selectedTaskTypeByTeacher[teacher.id] === type ? "active" : "";
+        return `<button class="task-type-btn ${active}" onclick="showTaskType('${teacher.id}', '${escapeForOnClick(type)}')">${type} <small>(${done}/${total})</small></button>`;
+      }).join("")}
         </div>
       `;
     }
@@ -1649,8 +2750,8 @@
             </thead>
             <tbody>
               ${tasks.map(task => {
-                const taskRowClass = task.done ? "task-row-done" : ((task.notes || "").trim() ? "task-row-note" : "");
-                return `
+        const taskRowClass = task.done ? "task-row-done" : ((task.notes || "").trim() ? "task-row-note" : "");
+        return `
                 <tr class="${taskRowClass}">
                   <td><input type="checkbox" ${task.done ? "checked" : ""} onchange="updateTask('${task.id}', 'done', this.checked)"></td>
                   <td>${task.title}</td>
@@ -1659,7 +2760,7 @@
                   <td><input type="date" value="${task.uploadDate || ""}" onchange="updateTask('${task.id}', 'uploadDate', this.value)"></td>
                 </tr>
                 `;
-              }).join("")}
+      }).join("")}
             </tbody>
           </table>
         </div>
@@ -1761,25 +2862,140 @@
       saveToStorage();
     }
 
+
+
+    function formatMoney(value) {
+      return Number(value || 0).toLocaleString("ar-EG", { maximumFractionDigits: 2 }) + " جنيه";
+    }
+
+    function getServiceStatusInfo(status) {
+      if (status === "done") return { label: "تم الانتهاء", className: "service-done" };
+      if (status === "working") return { label: "قيد التنفيذ", className: "service-working" };
+      return { label: "لم تبدأ", className: "service-pending" };
+    }
+
+    function saveIndividualService(event) {
+      event.preventDefault();
+
+      const service = {
+        id: makeId(),
+        name: document.getElementById("serviceName").value.trim(),
+        requester: document.getElementById("serviceRequester").value.trim(),
+        date: document.getElementById("serviceDate").value,
+        status: document.getElementById("serviceStatus").value,
+        deliveryDate: document.getElementById("serviceDeliveryDate").value,
+        details: document.getElementById("serviceDetails").value.trim()
+      };
+
+      individualServices.unshift(service);
+      saveToStorage();
+      document.getElementById("individualServiceForm").reset();
+      document.getElementById("serviceDate").valueAsDate = new Date();
+      renderIndividualServices();
+      renderAllCards();
+    }
+
+    function renderIndividualServices() {
+      const doneCount = individualServices.filter(item => item.status === "done").length;
+
+      const totalCountEl = document.getElementById("servicesTotalCount");
+      if (!totalCountEl) return;
+
+      totalCountEl.textContent = individualServices.length;
+      document.getElementById("servicesDoneCount").textContent = doneCount;
+      document.getElementById("servicesCountBadge").textContent = individualServices.length;
+
+      const body = document.getElementById("individualServicesTableBody");
+      if (!body) return;
+
+      if (!individualServices.length) {
+        body.innerHTML = `<tr><td colspan="7" class="empty-state">لا توجد خدمات فردية مضافة حتى الآن</td></tr>`;
+        return;
+      }
+
+      body.innerHTML = individualServices.map(item => {
+        const status = getServiceStatusInfo(item.status);
+        return `
+          <tr>
+            <td><strong>${item.name}</strong></td>
+            <td>${item.requester}</td>
+            <td>${item.date || "-"}</td>
+            <td><span class="service-status ${status.className}">${status.label}</span></td>
+            <td>${item.deliveryDate || "-"}</td>
+            <td>${item.details || "-"}</td>
+            <td><button class="btn btn-danger" onclick="deleteIndividualService('${item.id}')">حذف</button></td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    function deleteIndividualService(id) {
+      if (!confirm("هل تريد حذف هذه الخدمة؟")) return;
+      individualServices = individualServices.filter(item => item.id !== id);
+      saveToStorage();
+      renderIndividualServices();
+      renderAllCards();
+    }
+
     function resetAllData() {
-      if (!confirm("سيتم مسح كل المدرسين والجدول الزمني. هل تريد المتابعة؟")) return;
+      if (!confirm("سيتم مسح كل المدرسين والخدمات الفردية والجدول الزمني. هل تريد المتابعة؟")) return;
       teachers = [];
       timelineData = { sadat: {}, shebin: {} };
       selectedStudio = "sadat";
       selectedTaskTypeByTeacher = {};
+      individualServices = [];
       saveToStorage();
       renderAllCards();
       renderDailyTimeline();
     }
 
-    window.addEventListener("click", function(event) {
+    window.addEventListener("click", function (event) {
       if (event.target.classList.contains("modal")) {
         event.target.classList.remove("active");
       }
     });
 
-    renderAllCards();
-    renderDailyTimeline();
+
+    const motivationPhrases = [
+      "بسم الله نبدأ، وبالإخلاص ننجز.",
+      "توكل على الله، وخذ بالأسباب.",
+      "اللهم بارك لنا في وقتنا وجهدنا وعملنا.",
+      "ما كان لله دام واتصل.",
+      "استعن بالله ولا تعجز.",
+      "اللهم ارزقنا الإخلاص في القول والعمل.",
+      "الحمد لله على نعمة السعي والعمل.",
+      "اللهم اجعل عملنا نافعًا وأثرنا طيبًا.",
+      "لا حول ولا قوة إلا بالله، بها نبدأ ونتقوى.",
+      "اللهم وفقنا لما تحب وترضى."
+    ];
+
+    let motivationIndex = 0;
+
+    function rotateMotivationText() {
+      const motivationText = document.getElementById("motivationText");
+      if (!motivationText) return;
+
+      motivationText.classList.add("changing");
+      setTimeout(() => {
+        motivationIndex = (motivationIndex + 1) % motivationPhrases.length;
+        motivationText.textContent = motivationPhrases[motivationIndex];
+        motivationText.classList.remove("changing");
+      }, 350);
+    }
+
+    setInterval(rotateMotivationText, 5000);
+
+
+    async function initApp() {
+      await loadFromSupabase();
+      renderAllCards();
+      renderDailyTimeline();
+      if (document.getElementById("serviceDate")) document.getElementById("serviceDate").valueAsDate = new Date();
+      renderIndividualServices();
+    }
+
+    initApp();
   </script>
 </body>
+
 </html>
