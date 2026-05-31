@@ -1,46 +1,48 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>إدارة باكدجات المعلمين - Supabase</title>
+  <title>إدارة الباكدجات التسويقية للمدرسين</title>
   <style>
     :root {
-      --bg: #f4f8ff;
-      --card: rgba(255, 255, 255, 0.94);
-      --card-2: #ffffff;
-      --text: #102033;
-      --muted: #66758a;
-      --primary: #1769ff;
-      --primary-dark: #0b3f9d;
-      --blue-2: #54a3ff;
-      --green: #0da66b;
-      --green-dark: #078758;
-      --border: rgba(23, 105, 255, 0.14);
-      --danger: #e54866;
-      --warning: #d99000;
-      --shadow: 0 24px 60px rgba(23, 105, 255, 0.12);
-      --radius: 26px;
+      --blue-950: #07111f;
+      --blue-900: #0f172a;
+      --blue-800: #1e3a8a;
+      --blue-700: #1d4ed8;
+      --blue-600: #2563eb;
+      --blue-500: #3b82f6;
+      --blue-100: #dbeafe;
+      --blue-50: #eff6ff;
+      --white: #ffffff;
+      --soft: #f8fbff;
+      --line: #dbeafe;
+      --text: #172033;
+      --muted: #64748b;
+      --green: #16a34a;
+      --orange: #d97706;
+      --red: #dc2626;
+      --shadow: 0 24px 70px rgba(15, 23, 42, 0.12);
+      --soft-shadow: 0 16px 40px rgba(37, 99, 235, 0.10);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
     }
 
     * {
       box-sizing: border-box;
-      font-family: "Cairo", "Tahoma", Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      font-family: "Cairo", "Tahoma", sans-serif;
     }
 
     body {
-      margin: 0;
       min-height: 100vh;
       color: var(--text);
       background:
-        radial-gradient(circle at top right,
-          rgba(23, 105, 255, 0.16),
-          transparent 34%),
-        radial-gradient(circle at 18% 18%,
-          rgba(84, 163, 255, 0.18),
-          transparent 30%),
-        linear-gradient(180deg, #ffffff 0%, #eef5ff 46%, #f7fbff 100%);
+        radial-gradient(circle at 8% 10%, rgba(37, 99, 235, 0.18), transparent 26%),
+        radial-gradient(circle at 90% 0%, rgba(29, 78, 216, 0.14), transparent 28%),
+        linear-gradient(180deg, #f7fbff 0%, #eef5ff 45%, #ffffff 100%);
       overflow-x: hidden;
     }
 
@@ -48,1759 +50,1736 @@
       content: "";
       position: fixed;
       inset: 0;
-      background-image:
-        linear-gradient(rgba(23, 105, 255, 0.055) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(23, 105, 255, 0.055) 1px, transparent 1px);
-      background-size: 48px 48px;
-      mask-image: linear-gradient(to bottom, black, transparent 88%);
       pointer-events: none;
+      background-image:
+        linear-gradient(rgba(29, 78, 216, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(29, 78, 216, 0.045) 1px, transparent 1px);
+      background-size: 34px 34px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.85), transparent 80%);
+      z-index: -2;
     }
 
-    .app {
-      width: min(1280px, calc(100% - 32px));
-      margin: auto;
-      padding: 28px 0 60px;
+    header {
       position: relative;
+      overflow: hidden;
+      color: var(--white);
+      padding: 42px 24px 48px;
+      text-align: center;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(96, 165, 250, 0.55), transparent 30%),
+        linear-gradient(135deg, var(--blue-950), var(--blue-800) 52%, var(--blue-600));
+      box-shadow: 0 22px 60px rgba(15, 23, 42, 0.22);
+    }
+
+    header::before,
+    header::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.11);
+      filter: blur(1px);
+    }
+
+    header::before {
+      width: 260px;
+      height: 260px;
+      right: -80px;
+      top: -100px;
+    }
+
+    header::after {
+      width: 360px;
+      height: 360px;
+      left: -140px;
+      bottom: -210px;
+    }
+
+    header h1 {
+      position: relative;
+      font-size: clamp(28px, 4vw, 44px);
+      margin-bottom: 12px;
+      letter-spacing: -0.8px;
       z-index: 1;
     }
 
-    .hero {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 18px;
-      margin-bottom: 26px;
-      padding: 24px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      background: linear-gradient(135deg,
-          rgba(255, 255, 255, 0.98),
-          rgba(232, 243, 255, 0.86));
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(18px);
-      color: var(--text);
-    }
-
-    .brand-with-logo {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-    }
-
-    .logo-frame {
-      width: 92px;
-      height: 92px;
-      flex: 0 0 92px;
-      border-radius: 26px;
-      background: var(--primary);
-      border: 1px solid var(--border);
-      box-shadow: 0 14px 34px rgba(23, 105, 255, 0.12);
-      display: grid;
-      place-items: center;
-      overflow: hidden;
-    }
-
-    .logo-frame img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-
-    .logo-placeholder {
-      display: none;
-      width: 100%;
-      height: 100%;
-      place-items: center;
-      background: linear-gradient(135deg, var(--primary), var(--blue-2));
-      color: #fff;
-      font-weight: 900;
-      letter-spacing: 1px;
-    }
-
-    .hero h1 {
-      margin: 0 0 8px;
-      font-size: clamp(28px, 4vw, 48px);
-      line-height: 1.25;
-      color: var(--primary-dark);
-      letter-spacing: -1px;
-    }
-
-    .hero p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.8;
+    header p {
+      position: relative;
+      opacity: 0.9;
       font-size: 16px;
+      z-index: 1;
     }
 
-    .hero-badge {
-      min-width: 230px;
-      padding: 18px;
-      border-radius: 22px;
-      background: #ffffff;
-      border: 1px solid var(--border);
+    .container {
+      width: min(1440px, 94%);
+      margin: -24px auto 36px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .top-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(219, 234, 254, 0.95);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--soft-shadow);
+      backdrop-filter: blur(16px);
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 250px;
+      background: linear-gradient(180deg, #ffffff, #f8fbff);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 15px 18px;
+      font-size: 15px;
+      outline: none;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
+      transition: 0.25s;
+    }
+
+    .search-box:focus {
+      border-color: var(--blue-500);
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.14);
+    }
+
+
+
+    .portal-intro {
       text-align: center;
-      color: var(--primary-dark);
-      box-shadow: 0 14px 34px rgba(23, 105, 255, 0.09);
+      margin: 0 auto 22px;
+      padding: 10px 12px;
     }
 
-    .hero-badge strong {
-      display: block;
-      font-size: 34px;
-      margin-bottom: 4px;
-      color: var(--primary);
-      direction: ltr;
+    .portal-intro h2 {
+      font-size: clamp(24px, 3vw, 38px);
+      color: var(--blue-950);
+      margin-bottom: 8px;
+      letter-spacing: -0.7px;
     }
 
-    .hero-badge span {
+    .portal-intro p {
       color: var(--muted);
       font-weight: 800;
     }
 
-    .section-buttons {
+    .portal-cards {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      margin: 24px 0 18px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      margin-bottom: 28px;
     }
 
-    .section-btn {
-      min-height: 112px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      gap: 10px;
-      color: var(--primary-dark);
-      background: #ffffff;
-      border: 1px solid var(--border);
-      border-radius: 28px;
-      box-shadow: var(--shadow);
-      font-size: clamp(16px, 1.7vw, 22px);
-      font-weight: 900;
+    .portal-card {
+      min-height: 310px;
+      border: 0;
       cursor: pointer;
-      transition: 0.25s ease;
-      padding: 18px 16px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 34px;
+      padding: 28px;
+      color: #fff;
+      text-align: right;
+      box-shadow: 0 30px 80px rgba(15, 23, 42, 0.20);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      isolation: isolate;
     }
 
-    .section-btn:hover,
-    button:hover {
-      transform: translateY(-2px);
-      background: #f0f7ff;
-      border-color: rgba(23, 105, 255, 0.32);
+    .portal-card::before {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      border-radius: 33px;
+      border: 1px solid rgba(255,255,255,0.28);
+      pointer-events: none;
+      z-index: 2;
     }
 
-    .section-btn.active {
-      color: #ffffff;
-      background: linear-gradient(135deg, var(--primary), var(--blue-2));
-      border-color: transparent;
-      box-shadow: 0 18px 44px rgba(23, 105, 255, 0.24);
+    .portal-card::after {
+      content: "";
+      position: absolute;
+      width: 240px;
+      height: 240px;
+      left: -70px;
+      bottom: -80px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.16);
+      filter: blur(1px);
+      z-index: -1;
     }
 
-    .section-panel {
-      display: none;
+    .portal-card:hover {
+      transform: translateY(-10px) scale(1.015);
+      box-shadow: 0 38px 100px rgba(15, 23, 42, 0.30);
     }
 
-    .section-panel.active {
-      display: block;
-    }
-
-    .panel-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 22px;
-      backdrop-filter: blur(18px);
-    }
-
-    .panel-head {
-      display: flex;
-      justify-content: space-between;
+    .portal-card .portal-label {
+      display: inline-flex;
       align-items: center;
-      gap: 14px;
+      gap: 8px;
+      padding: 9px 13px;
+      background: rgba(255,255,255,0.16);
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 999px;
+      font-weight: 900;
+      font-size: 13px;
+      backdrop-filter: blur(10px);
       margin-bottom: 18px;
     }
 
-    .panel-head h2,
-    .add-client-layout h2 {
-      margin: 0;
-      font-size: 24px;
-      color: var(--primary-dark);
+    .portal-card h2 {
+      font-size: clamp(26px, 3vw, 40px);
+      line-height: 1.22;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 3;
     }
 
-    .panel-head p {
-      margin: 5px 0 0;
-      color: var(--muted);
-      font-size: 14px;
+    .portal-card p {
+      color: rgba(255,255,255,0.86);
+      font-weight: 800;
       line-height: 1.8;
+      max-width: 310px;
+      position: relative;
+      z-index: 3;
     }
 
-    .db-status {
+    .portal-meta {
+      position: absolute;
+      right: 24px;
+      bottom: 22px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 4;
       font-weight: 900;
-      border-radius: 999px;
-      padding: 9px 13px;
-      background: #eaf4ff;
-      color: var(--primary-dark);
-      font-size: 12px;
-      border: 1px solid var(--border);
     }
 
-    .db-status.local {
-      background: #fff7e6;
-      color: #9a6500;
-      border-color: rgba(217, 144, 0, 0.22);
+    .portal-count {
+      min-width: 42px;
+      height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.26);
+      border-radius: 14px;
+      backdrop-filter: blur(12px);
     }
 
-    .db-status.online {
-      background: #eafbf5;
-      color: var(--green-dark);
-      border-color: rgba(13, 166, 107, 0.18);
-    }
-
-    .add-client-layout {
+    .portal-icon {
+      position: absolute;
+      left: 24px;
+      bottom: 24px;
+      width: 128px;
+      height: 128px;
       display: grid;
-      grid-template-columns: 430px 1fr;
-      gap: 22px;
-      align-items: start;
+      place-items: center;
+      z-index: 1;
     }
 
-    form {
+    .facebook-card {
+      background:
+        radial-gradient(circle at 18% 18%, rgba(255,255,255,0.28), transparent 34%),
+        linear-gradient(135deg, #0b4fd8, #1877f2 55%, #72b6ff);
+      border-radius: 38px;
+    }
+
+    .facebook-card .portal-icon {
+      border-radius: 34px;
+      background: rgba(255,255,255,0.18);
+      box-shadow: inset 0 0 0 2px rgba(255,255,255,0.22), 0 18px 40px rgba(0,0,0,0.16);
+      font-size: 122px;
+      font-family: Arial, sans-serif;
+      font-weight: 900;
+      line-height: 1;
+      padding-top: 22px;
+    }
+
+    .youtube-card {
+      background:
+        radial-gradient(circle at 18% 18%, rgba(255,255,255,0.24), transparent 34%),
+        linear-gradient(135deg, #7f0000, #ff0033 54%, #ff7a7a);
+    }
+
+    .youtube-card .portal-icon {
+      width: 160px;
+      height: 112px;
+      border-radius: 32px;
+      background: rgba(255,255,255,0.18);
+      box-shadow: inset 0 0 0 2px rgba(255,255,255,0.22), 0 18px 40px rgba(0,0,0,0.16);
+    }
+
+    .youtube-card .portal-icon::before {
+      content: "";
+      width: 0;
+      height: 0;
+      border-top: 25px solid transparent;
+      border-bottom: 25px solid transparent;
+      border-right: 42px solid #fff;
+      transform: rotate(180deg) translateX(-4px);
+    }
+
+    .studio-card {
+      background:
+        radial-gradient(circle at 20% 15%, rgba(255,255,255,0.28), transparent 32%),
+        linear-gradient(135deg, #111827, #334155 55%, #38bdf8);
+    }
+
+    .studio-card .portal-icon {
+      width: 150px;
+      height: 118px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.14);
+      box-shadow: inset 0 0 0 2px rgba(255,255,255,0.22), 0 18px 40px rgba(0,0,0,0.18);
+    }
+
+    .studio-card .portal-icon::before {
+      content: "";
+      position: absolute;
+      width: 92px;
+      height: 62px;
+      bottom: 18px;
+      right: 20px;
+      border-radius: 14px;
+      background: #fff;
+      box-shadow: 0 -32px 0 -14px rgba(255,255,255,0.88);
+    }
+
+    .studio-card .portal-icon::after {
+      content: "";
+      position: absolute;
+      width: 38px;
+      height: 38px;
+      border: 10px solid #0f172a;
+      border-radius: 50%;
+      bottom: 30px;
+      right: 47px;
+      background: #38bdf8;
+      box-shadow: -58px -22px 0 -8px #fff;
+    }
+
+    .view-section {
+      display: none;
+      animation: fadeUp 0.38s ease both;
+    }
+
+    .view-section.active {
       display: block;
+    }
+
+    .back-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .back-btn {
+      border: 0;
+      border-radius: 16px;
+      padding: 13px 18px;
+      cursor: pointer;
+      font-weight: 900;
+      color: #fff;
+      background: linear-gradient(135deg, var(--blue-950), var(--blue-700));
+      box-shadow: 0 14px 28px rgba(15,23,42,0.16);
+      transition: 0.25s;
+    }
+
+    .back-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 1050px) {
+      .portal-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .portal-card {
+        min-height: 250px;
+      }
+    }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    @media (max-width: 900px) {
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .section {
+      position: relative;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.88);
+      border-radius: var(--radius-xl);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(219, 234, 254, 0.95);
+      backdrop-filter: blur(18px);
+    }
+
+    .section::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 5px;
+      background: linear-gradient(90deg, var(--blue-900), var(--blue-600), #93c5fd);
+    }
+
+    .section::after {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      left: -80px;
+      top: -90px;
+      background: rgba(37, 99, 235, 0.08);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .section-header {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 20px;
+      z-index: 1;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title h2 {
+      font-size: 23px;
+      letter-spacing: -0.4px;
+      color: var(--blue-950);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 34px;
+      padding: 6px 11px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--blue-50), var(--blue-100));
+      color: var(--blue-800);
+      font-size: 13px;
+      font-weight: 900;
+      border: 1px solid var(--line);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.9);
+    }
+
+    .package-buttons {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+      z-index: 1;
+    }
+
+    .package-btn,
+    .btn {
+      border: 0;
+      border-radius: 16px;
+      padding: 13px 15px;
+      cursor: pointer;
+      font-weight: 900;
+      transition: 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .package-btn::before,
+    .btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.45), transparent);
+      transform: translateX(120%);
+      transition: 0.45s;
+    }
+
+    .package-btn:hover::before,
+    .btn:hover::before {
+      transform: translateX(-120%);
+    }
+
+    .package-btn {
+      background: linear-gradient(180deg, #ffffff, var(--blue-50));
+      color: var(--blue-700);
+      border: 1px solid #bfdbfe;
+      box-shadow: 0 10px 22px rgba(37, 99, 235, 0.08);
+    }
+
+    .package-btn:hover {
+      transform: translateY(-3px);
+      background: linear-gradient(135deg, var(--blue-700), var(--blue-500));
+      color: #fff;
+      box-shadow: 0 16px 30px rgba(37, 99, 235, 0.22);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--blue-700), var(--blue-500));
+      color: #fff;
+      box-shadow: 0 14px 28px rgba(37, 99, 235, 0.20);
+    }
+
+    .btn-dark {
+      background: linear-gradient(135deg, var(--blue-950), var(--blue-800));
+      color: #fff;
+      box-shadow: 0 14px 28px rgba(15, 23, 42, 0.18);
+    }
+
+    .btn-danger {
+      background: linear-gradient(180deg, #fff, #eff6ff);
+      color: var(--blue-800);
+      border: 1px solid var(--line);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .cards {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
+      gap: 16px;
+      z-index: 1;
+    }
+
+    .teacher-card {
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.96), rgba(239,246,255,0.78)),
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.14), transparent 40%);
+      border: 1px solid rgba(191, 219, 254, 0.95);
+      border-radius: 24px;
+      padding: 20px;
+      cursor: pointer;
+      position: relative;
+      min-height: 195px;
+      box-shadow: 0 16px 36px rgba(37, 99, 235, 0.10);
+      transition: 0.25s ease;
+      overflow: hidden;
+    }
+
+    .teacher-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 6px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--blue-700), var(--blue-500), #bfdbfe);
+    }
+
+    .teacher-card::after {
+      content: "";
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      left: -35px;
+      bottom: -35px;
+      border-radius: 50%;
+      background: rgba(37, 99, 235, 0.08);
+    }
+
+    .teacher-card:hover {
+      transform: translateY(-6px) scale(1.01);
+      border-color: var(--blue-500);
+      box-shadow: 0 24px 50px rgba(37, 99, 235, 0.18);
+    }
+
+    .teacher-card h3 {
+      font-size: 21px;
+      margin-bottom: 9px;
+      color: var(--blue-950);
+      padding-right: 8px;
+    }
+
+    .teacher-card p {
+      font-size: 14px;
+      margin: 6px 0;
+      color: var(--muted);
+      position: relative;
+      z-index: 1;
+    }
+
+    .card-footer {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      right: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      z-index: 2;
+    }
+
+    .progress-mini {
+      height: 9px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+      flex: 1;
+      box-shadow: inset 0 1px 2px rgba(15,23,42,0.10);
+    }
+
+    .progress-mini span {
+      display: block;
+      height: 100%;
+      background: linear-gradient(90deg, var(--blue-800), var(--blue-500));
+      border-radius: 999px;
+      width: 0%;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 15%, rgba(37,99,235,0.28), transparent 28%),
+        rgba(7, 17, 31, 0.72);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 20px;
+      backdrop-filter: blur(10px);
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: linear-gradient(180deg, #ffffff, #f8fbff);
+      width: min(1120px, 100%);
+      max-height: 90vh;
+      overflow: auto;
+      border-radius: 30px;
+      padding: 26px;
+      box-shadow: 0 40px 100px rgba(0,0,0,0.34);
+      border: 1px solid rgba(219,234,254,0.95);
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 20px;
+      position: sticky;
+      top: 0;
+      background: rgba(255,255,255,0.92);
+      padding-bottom: 14px;
+      z-index: 2;
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(219,234,254,0.8);
+    }
+
+    .modal-header h2 {
+      color: var(--blue-950);
+      letter-spacing: -0.4px;
+    }
+
+    .close-btn {
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, #fff, var(--blue-50));
+      color: var(--blue-900);
+      border-radius: 14px;
+      padding: 10px 14px;
+      cursor: pointer;
+      font-weight: 900;
+      transition: 0.25s;
+    }
+
+    .close-btn:hover {
+      transform: translateY(-2px);
+      background: var(--blue-100);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    @media (max-width: 700px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     label {
       display: block;
       font-size: 14px;
-      color: var(--muted);
-      margin-bottom: 8px;
-      font-weight: 800;
+      color: var(--blue-900);
+      margin-bottom: 7px;
+      font-weight: 900;
     }
 
     input,
     select,
     textarea {
       width: 100%;
-      border: 1px solid var(--border);
+      border: 1px solid #cfe0ff;
       border-radius: 16px;
-      padding: 14px 15px;
-      font-size: 15px;
-      background: #f8fbff;
-      color: var(--text);
+      padding: 13px 14px;
       outline: none;
-      transition: 0.2s ease;
-    }
-
-    textarea {
-      min-height: 104px;
-      resize: vertical;
-      line-height: 1.7;
+      font-size: 14px;
+      background: rgba(255,255,255,0.92);
+      transition: 0.25s;
     }
 
     input:focus,
     select:focus,
     textarea:focus {
-      border-color: rgba(23, 105, 255, 0.85);
-      box-shadow: 0 0 0 4px rgba(23, 105, 255, 0.12);
-      background: #ffffff;
+      border-color: var(--blue-500);
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.12);
+      background: #fff;
     }
 
-    .form-row {
-      margin-bottom: 15px;
+    textarea {
+      resize: vertical;
+      min-height: 90px;
     }
 
-    .two-cols {
+    .full {
+      grid-column: 1 / -1;
+    }
+
+    .details-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 20px;
     }
 
-    .btns {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 18px;
+    @media (max-width: 1000px) {
+      .details-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
-    button {
-      border: 0;
-      border-radius: 18px;
-      padding: 13px 18px;
-      font-weight: 900;
-      cursor: pointer;
-      transition: 0.25s ease;
-      font-size: 14px;
-      color: #164070;
-      background: #ffffff;
-      border: 1px solid var(--border);
-      box-shadow: 0 10px 24px rgba(23, 105, 255, 0.07);
-    }
-
-    .primary,
-    .success {
-      background: linear-gradient(135deg, var(--primary), var(--blue-2));
-      color: #fff;
-      border: 0;
-    }
-
-    .secondary {
-      background: #eef6ff;
-      color: var(--primary-dark);
-      border-color: rgba(23, 105, 255, 0.16);
-    }
-
-    .danger {
-      background: #fff3f5;
-      color: #c83250;
-      border-color: rgba(229, 72, 102, 0.22);
-    }
-
-    .ghost {
-      background: #ecfdf5;
-      color: var(--green-dark);
-      border-color: rgba(13, 166, 107, 0.18);
-    }
-
-    .warning {
-      background: #fff7e6;
-      color: #9a6500;
-      border-color: rgba(217, 144, 0, 0.22);
-    }
-
-    .hint {
-      margin: 0 0 14px;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.7;
-    }
-
-    .shooting-booking-fields,
-    .task-form {
-      display: none;
-      background: #f8fbff;
-      border: 1px dashed rgba(23, 105, 255, 0.28);
-      border-radius: 22px;
-      padding: 16px;
-      margin-bottom: 15px;
-    }
-
-    .shooting-booking-fields.active,
-    .task-form.active {
-      display: block;
-    }
-
-    .shooting-booking-fields h3 {
-      color: var(--primary-dark);
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
+    .info-panel,
+    .timeline-panel,
+    .progress-box {
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.95), rgba(239,246,255,0.72));
+      border: 1px solid rgba(191, 219, 254, 0.95);
+      border-radius: 24px;
+      padding: 20px;
       margin-bottom: 18px;
+      box-shadow: 0 14px 34px rgba(37, 99, 235, 0.08);
     }
 
-    .stat {
-      background: #ffffff;
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 16px;
-      box-shadow: 0 12px 28px rgba(23, 105, 255, 0.07);
-      position: relative;
-      overflow: hidden;
+    .info-panel h3,
+    .timeline-panel h3,
+    .progress-box h3 {
+      color: var(--blue-950);
+      margin-bottom: 10px;
     }
 
-    .stat::after {
-      content: "";
-      position: absolute;
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      left: -35px;
-      top: -45px;
-      background: rgba(23, 105, 255, 0.08);
-    }
-
-    .stat span {
-      display: block;
+    .info-panel p,
+    .timeline-panel p,
+    .progress-box p {
       color: var(--muted);
-      font-size: 13px;
-      margin-bottom: 8px;
-      font-weight: 800;
+      margin: 7px 0;
     }
 
-    .stat strong {
-      font-size: 24px;
-      color: var(--primary-dark);
-      direction: ltr;
-    }
-
-    .filters {
-      display: grid;
-      grid-template-columns: 1.4fr 1fr 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 18px;
-      padding: 14px;
-      border-radius: 22px;
-      background: #ffffff;
-      border: 1px solid var(--border);
-      box-shadow: 0 12px 28px rgba(23, 105, 255, 0.06);
-    }
-
-    .client-list,
-    .packages-board {
-      display: grid;
-      gap: 14px;
-    }
-
-    .client-card,
-    .teacher-package,
-    .booking-card {
-      background: #ffffff;
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      overflow: hidden;
-      box-shadow: 0 12px 30px rgba(23, 105, 255, 0.07);
-    }
-
-    .client-card {
-      padding: 16px;
-      cursor: pointer;
-      transition: 0.2s ease;
-    }
-
-    .client-card:hover {
-      border-color: rgba(23, 105, 255, 0.55);
-      background: #f6fbff;
-      transform: translateY(-2px);
-    }
-
-    .client-card strong {
-      display: block;
-      margin-bottom: 6px;
-      font-size: 17px;
-      color: var(--primary-dark);
-    }
-
-    .client-card span {
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.8;
-    }
-
-    .package-head {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 16px;
-      align-items: center;
-      padding: 18px;
-      background: linear-gradient(135deg, #ffffff, #eef6ff);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .package-head h3 {
-      margin: 0 0 6px;
-      font-size: 21px;
-      color: var(--primary-dark);
-    }
-
-    .package-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.6;
-    }
-
-    .package-actions {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .package-body {
-      padding: 16px;
-      display: grid;
-      gap: 14px;
-    }
-
-    .chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 7px 10px;
+    .progress-track {
+      height: 18px;
+      background: #dbeafe;
       border-radius: 999px;
-      background: #eaf4ff;
-      color: var(--primary-dark);
+      overflow: hidden;
+      margin: 12px 0;
+      box-shadow: inset 0 2px 5px rgba(15,23,42,0.10);
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--blue-900), var(--blue-600), #93c5fd);
+      border-radius: 999px;
+      transition: 0.4s;
+    }
+
+    .status-text {
       font-weight: 900;
-      font-size: 12px;
-      white-space: nowrap;
-      border: 1px solid rgba(23, 105, 255, 0.12);
+      font-size: 15px;
     }
 
-    .chip.green {
-      background: #eafbf5;
-      color: var(--green-dark);
-      border-color: rgba(13, 166, 107, 0.16);
-    }
-
-    .chip.warning {
-      background: #fff7e6;
-      color: #9a6500;
-      border-color: rgba(217, 144, 0, 0.18);
-    }
-
-    .tasks-table-wrap {
-      overflow-x: auto;
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      box-shadow: 0 10px 24px rgba(23, 105, 255, 0.05);
-    }
+    .status-good { color: var(--green); }
+    .status-late { color: var(--red); }
+    .status-warn { color: var(--orange); }
 
     table {
       width: 100%;
-      min-width: 840px;
       border-collapse: collapse;
       background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 14px 36px rgba(37, 99, 235, 0.10);
+      border: 1px solid rgba(219,234,254,0.9);
     }
 
     th,
     td {
-      padding: 13px 12px;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid #e8f1ff;
+      padding: 13px;
       text-align: right;
-      vertical-align: top;
       font-size: 14px;
+      vertical-align: top;
     }
 
     th {
-      background: #f8fbff;
-      color: #475569;
-      font-weight: 900;
-    }
-
-    tr:last-child td {
-      border-bottom: 0;
-    }
-
-    tr.done-row {
-      background: #f0fff7;
-      opacity: 0.82;
-    }
-
-    .task-details {
-      line-height: 1.7;
-      max-width: 360px;
-    }
-
-    .status-pill {
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 999px;
-      padding: 7px 10px;
-      font-weight: 900;
-      font-size: 12px;
-      background: #eaf4ff;
-      color: var(--primary-dark);
-      white-space: nowrap;
-    }
-
-    .status-pill.done {
-      background: #eafbf5;
-      color: var(--green-dark);
-    }
-
-    input[type="checkbox"] {
-      width: 19px;
-      height: 19px;
-      accent-color: var(--primary);
-      cursor: pointer;
-    }
-
-    .empty {
-      text-align: center;
-      color: var(--muted);
-      padding: 32px 14px;
-      background: #ffffff;
-      border: 1px dashed rgba(23, 105, 255, 0.24);
-      border-radius: 20px;
-    }
-
-    .schedule-days {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 10px;
-      margin-bottom: 18px;
-    }
-
-    .day-btn {
-      background: #ffffff;
-      color: var(--primary-dark);
-      border: 1px solid var(--border);
-      box-shadow: 0 10px 24px rgba(23, 105, 255, 0.07);
-      padding: 14px 10px;
-      border-radius: 18px;
-    }
-
-    .day-btn.active {
-      background: linear-gradient(135deg, var(--primary), var(--blue-2));
+      background: linear-gradient(135deg, var(--blue-950), var(--blue-800));
       color: #fff;
+      white-space: nowrap;
+      font-weight: 900;
     }
 
-    .booking-list {
-      display: grid;
-      gap: 12px;
+    tr:nth-child(even) td {
+      background: #f8fbff;
     }
 
-    .booking-card {
-      padding: 16px;
+    tr:hover td {
+      background: #eff6ff;
     }
 
-    .booking-card strong {
-      display: block;
+    td input[type="checkbox"] {
+      width: 21px;
+      height: 21px;
+      cursor: pointer;
+      accent-color: var(--blue-600);
+    }
+
+    .task-note {
+      min-height: 55px;
+      font-size: 13px;
+    }
+
+    .task-row-note td {
+      background: linear-gradient(135deg, #fff7ed, #fed7aa) !important;
+      border-bottom-color: #fdba74;
+    }
+
+    .task-row-note textarea,
+    .task-row-note input[type="date"] {
+      border-color: #fb923c;
+      background: #fff7ed;
+    }
+
+    .task-row-done td {
+      background: linear-gradient(135deg, #f0fdf4, #bbf7d0) !important;
+      border-bottom-color: #86efac;
+    }
+
+    .task-row-done textarea,
+    .task-row-done input[type="date"] {
+      border-color: #22c55e;
+      background: #f0fdf4;
+    }
+
+    .task-row-done td input[type="checkbox"] {
+      accent-color: var(--green);
+    }
+
+    .task-type-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 16px 0;
+      padding: 10px;
+      background: rgba(239,246,255,0.75);
+      border: 1px solid rgba(219,234,254,0.95);
+      border-radius: 22px;
+    }
+
+    .task-type-btn {
+      border: 1px solid #bfdbfe;
+      background: linear-gradient(180deg, #fff, var(--blue-50));
+      color: var(--blue-700);
+      border-radius: 16px;
+      padding: 12px 15px;
+      cursor: pointer;
+      font-weight: 900;
+      transition: 0.25s;
+      box-shadow: 0 8px 18px rgba(37,99,235,0.08);
+    }
+
+    .task-type-btn:hover {
+      transform: translateY(-3px);
+      background: #dbeafe;
+    }
+
+    .task-type-btn.active {
+      background: linear-gradient(135deg, var(--blue-800), var(--blue-500));
+      color: #fff;
+      border-color: var(--blue-500);
+      box-shadow: 0 16px 30px rgba(37,99,235,0.26);
+    }
+
+    .task-type-title {
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.98), rgba(239,246,255,0.84));
+      border: 1px solid rgba(191,219,254,0.95);
+      padding: 15px 16px;
+      border-radius: 20px;
+      margin: 10px 0 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      box-shadow: 0 12px 26px rgba(37, 99, 235, 0.08);
+    }
+
+    .task-type-title strong {
+      color: var(--blue-950);
       font-size: 18px;
-      margin-bottom: 6px;
-      color: var(--primary-dark);
     }
 
-    .booking-card p {
-      margin: 6px 0;
+    .task-type-title span {
+      color: var(--blue-700);
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+
+
+    .studio-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 14px 0 18px;
+      padding: 10px;
+      background: rgba(239,246,255,0.75);
+      border: 1px solid rgba(219,234,254,0.95);
+      border-radius: 22px;
+    }
+
+    .studio-btn {
+      border: 1px solid #bfdbfe;
+      background: linear-gradient(180deg, #fff, var(--blue-50));
+      color: var(--blue-700);
+      border-radius: 16px;
+      padding: 12px 18px;
+      cursor: pointer;
+      font-weight: 900;
+      transition: 0.25s;
+      box-shadow: 0 8px 18px rgba(37,99,235,0.08);
+    }
+
+    .studio-btn:hover {
+      transform: translateY(-3px);
+      background: #dbeafe;
+    }
+
+    .studio-btn.active {
+      background: linear-gradient(135deg, var(--blue-800), var(--blue-500));
+      color: #fff;
+      border-color: var(--blue-500);
+      box-shadow: 0 16px 30px rgba(37,99,235,0.26);
+    }
+
+    .timeline-table td.scheduled-cell {
+      background: linear-gradient(135deg, #fff7ed, #fed7aa) !important;
+      border: 1px solid #fb923c;
+      box-shadow: inset 0 0 0 2px rgba(251, 146, 60, 0.22);
+    }
+
+    .timeline-table td.scheduled-cell .timeline-input {
+      color: #7c2d12;
+      font-weight: 900;
+    }
+
+    .timeline-table-wrapper {
+      overflow: auto;
+      background: rgba(255,255,255,0.9);
+      border-radius: 24px;
+      padding: 14px;
+      box-shadow: 0 18px 44px rgba(37, 99, 235, 0.11);
+      margin-top: 24px;
+      border: 1px solid rgba(219,234,254,0.95);
+    }
+
+    .timeline-table {
+      min-width: 950px;
+    }
+
+    .timeline-table th {
+      background: linear-gradient(135deg, var(--blue-950), var(--blue-800));
+      font-size: 13px;
+    }
+
+    .timeline-table td {
+      height: 56px;
+      min-width: 120px;
+      background: #fff;
+    }
+
+    .timeline-table td:first-child,
+    .timeline-table th:first-child {
+      position: sticky;
+      right: 0;
+      z-index: 1;
+      background: linear-gradient(180deg, var(--blue-50), #ffffff);
+      color: var(--blue-950);
+      font-weight: 900;
+      min-width: 95px;
+      border-left: 1px solid var(--line);
+    }
+
+    .timeline-input {
+      border: 0;
+      background: transparent;
+      min-height: 40px;
+      padding: 6px;
+      font-size: 12px;
+      box-shadow: none !important;
+    }
+
+    .timeline-input:focus {
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.10) !important;
+    }
+
+    .empty-state {
       color: var(--muted);
-      line-height: 1.7;
+      text-align: center;
+      padding: 34px 10px;
+      background:
+        linear-gradient(135deg, #fff, var(--blue-50));
+      border-radius: 22px;
+      border: 1px dashed #93c5fd;
+      font-weight: 800;
     }
 
-    .loading {
-      opacity: 0.55;
-      pointer-events: none;
+    .week-target {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 12px;
     }
 
-    @media (max-width: 980px) {
-
-      .hero,
-      .panel-head {
-        flex-direction: column;
-        align-items: stretch;
+    @media (max-width: 700px) {
+      .week-target {
+        grid-template-columns: 1fr 1fr;
       }
+    }
 
-      .section-buttons {
-        grid-template-columns: repeat(2, 1fr);
-      }
+    .week-card {
+      background: linear-gradient(180deg, #fff, var(--blue-50));
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 13px;
+      text-align: center;
+      box-shadow: 0 8px 18px rgba(37,99,235,0.06);
+    }
 
-      .add-client-layout,
-      .filters,
-      .stats,
-      .schedule-days {
-        grid-template-columns: 1fr;
-      }
+    .week-card strong {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--blue-950);
+    }
 
-      .package-head {
-        grid-template-columns: 1fr;
-      }
-
-      .package-actions {
-        justify-content: flex-start;
-      }
+    .week-card span {
+      color: var(--muted);
+      font-size: 13px;
     }
 
     @media (max-width: 560px) {
-      .app {
-        width: min(100% - 20px, 1280px);
-        padding-top: 12px;
+      header {
+        padding: 32px 16px 42px;
       }
 
-      .hero,
-      .panel-card {
+      .container {
+        width: 94%;
+        margin-top: -18px;
+      }
+
+      .section,
+      .modal-content {
         padding: 18px;
+        border-radius: 24px;
       }
 
-      .brand-with-logo {
-        align-items: flex-start;
-      }
-
-      .logo-frame {
-        width: 70px;
-        height: 70px;
-        flex-basis: 70px;
-        border-radius: 20px;
-      }
-
-      .section-buttons,
-      .two-cols {
+      .package-buttons {
         grid-template-columns: 1fr;
       }
 
-      .section-btn {
-        min-height: 92px;
+      .teacher-card {
+        min-height: 205px;
+      }
+
+      th,
+      td {
+        padding: 10px;
+        font-size: 13px;
       }
     }
   </style>
 </head>
-
 <body>
-  <main class="app">
-    <section class="hero">
-      <div class="brand-with-logo">
-        <div class="logo-frame">
-          <img src="assets/logo.png" alt="لوجو الشركة" onerror="
-                this.style.display = 'none';
-                this.parentElement.querySelector(
-                  '.logo-placeholder',
-                ).style.display = 'grid';
-              " />
-          <div class="logo-placeholder">LOGO</div>
-        </div>
-        <div>
-          <h1>لوحة إدارة باكدجات المعلمين</h1>
-        </div>
-      </div>
-      <div class="hero-badge">
-        <strong id="totalClients">0</strong><span>عميل مسجل</span>
-      </div>
-    </section>
-    <section class="section-buttons">
-      <button class="section-btn active" type="button" data-target="addClientPanel">
-        ➕ إضافة عميل جديد
-      </button>
-      <button class="section-btn" type="button" data-target="facebookPanel">
-        📘 عملاء الفيس بوك
-      </button>
-      <button class="section-btn" type="button" data-target="youtubePanel">
-        ▶️ عملاء اليوتيوب
-      </button>
-      <button class="section-btn" type="button" data-target="schedulePanel">
-        🗓️ جدول التصوير
-      </button>
-    </section>
-    <section id="addClientPanel" class="section-panel active">
-      <div class="panel-card">
-        <div class="panel-head">
-          <div>
-            <h2>إضافة عميل جديد</h2>
-            <p>
-              اكتب بيانات المعلم والباكدج يدويًا: الاسم، النوع، التفاصيل، وعدد
-              التاسكات.
-            </p>
-          </div>
-          <span id="dbStatus" class="db-status local">وضع محلي</span>
-        </div>
-        <div class="add-client-layout">
-          <form id="clientForm">
-            <div class="form-row">
-              <label for="teacherName">اسم المدرس</label><input id="teacherName" type="text"
-                placeholder="مثال: أ/ محمد أحمد" required />
-            </div>
-            <div class="form-row">
-              <label for="subjectName">اسم المادة</label><input id="subjectName" type="text"
-                placeholder="مثال: فيزياء / أحياء / رياضيات" required />
-            </div>
-            <div class="two-cols">
-              <div class="form-row">
-                <label for="startDate">تاريخ الاشتراك</label><input id="startDate" type="date" required />
-              </div>
-              <div class="form-row">
-                <label for="duration">مدة الاشتراك</label><select id="duration" required>
-                  <option value="1">شهر</option>
-                  <option value="3">3 شهور</option>
-                </select>
-              </div>
-            </div>
-            <div class="two-cols">
-              <div class="form-row">
-                <label for="packageName">اسم الباكدج</label><input id="packageName" type="text"
-                  placeholder="مثال: باكدج اليوتيوب 8 ساعات" required />
-              </div>
-              <div class="form-row">
-                <label for="packagePlatform">نوع الباكدج</label><select id="packagePlatform" required>
-                  <option value="facebook">فيس بوك</option>
-                  <option value="youtube">يوتيوب</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-row">
-              <label for="packageDetails">تفاصيل الباكدج</label><textarea id="packageDetails"
-                placeholder="مثال: 8 تصميمات، 4 ريلز، 4 بوستات منوعة / 8 ساعات تصوير، ثامبنيل، رفع وجدولة..."
-                required></textarea>
-            </div>
-            <div class="form-row">
-              <label for="packageTotalTasks">عدد التاسكات داخل الباكدج</label><input id="packageTotalTasks"
-                type="number" min="1" placeholder="مثال: 16" required />
-            </div>
+  <header>
+    <h1>إدارة الباكدجات التسويقية للمدرسين</h1>
+  </header>
 
-            <div class="btns">
-              <button class="primary" type="submit">إضافة المدرس</button><button class="secondary" type="button"
-                id="exportCsv">
-                تصدير التاسكات CSV</button><button class="danger" type="button" id="clearAll">
-                مسح كل البيانات
-              </button>
-            </div>
-          </form>
-          <div>
-            <h2 style="margin: 0 0 14px">العملاء المسجلين</h2>
-            <div class="client-list" id="clientList"></div>
-          </div>
-        </div>
+  <main class="container">
+    <section id="homeView" class="view-section active">
+      <div class="portal-intro">
+      </div>
+
+      <div class="portal-cards">
+        <button class="portal-card facebook-card" onclick="openView('facebookView')" aria-label="فتح باكدجات الفيس بوك">
+          <span class="portal-label">قسم الباكدجات</span>
+          <h2>باكدجات  <br>الفيس بوك</h2>
+          <div class="portal-icon">f</div>
+          <div class="portal-meta"><span class="portal-count" id="portalFacebookCount">0</span><span>باكدج مضافة</span></div>
+        </button>
+
+        <button class="portal-card youtube-card" onclick="openView('youtubeView')" aria-label="فتح باكدجات اليوتيوب">
+          <span class="portal-label">قسم الفيديو</span>
+          <h2>باكدجات   <br>اليوتيوب</h2>
+          <div class="portal-icon"></div>
+          <div class="portal-meta"><span class="portal-count" id="portalYoutubeCount">0</span><span>باكدج مضافة</span></div>
+        </button>
+
+        <button class="portal-card studio-card" onclick="openView('studiosView')" aria-label="فتح الاستوديوهات">
+          <span class="portal-label">جدول زمني</span>
+          <h2>الاستوديوهات</h2>
+          <div class="portal-icon"></div>
+          <div class="portal-meta"><span class="portal-count">2</span><span>استوديو</span></div>
+        </button>
       </div>
     </section>
-    <section id="facebookPanel" class="section-panel">
-      <div class="panel-card">
-        <div class="panel-head">
-          <div>
-            <h2>عملاء باكدجات الفيس بوك</h2>
-            <p>كل مدرس له مكان مستقل، وتتم إضافة التاسكات يدويًا.</p>
+
+    <section id="facebookView" class="view-section">
+      <div class="back-row">
+        <button class="back-btn" onclick="goHome()">↩ رجوع للأقسام</button>
+      </div>
+
+      <div class="top-actions">
+        <input id="searchInput" class="search-box" type="text" placeholder="ابحث باسم المدرس، المادة، المحافظة، أو نوع الباكدج..." oninput="renderAllCards()" />
+        <button class="btn btn-dark" onclick="resetAllData()">مسح كل البيانات</button>
+      </div>
+
+      <div class="section">
+        <div class="section-header">
+          <div class="section-title">
+            <h2>باكدجات فيس بوك</h2>
+            <span class="badge" id="facebookCount">0</span>
           </div>
         </div>
-        <div class="stats" id="facebookStats"></div>
-        <div class="filters">
-          <input id="facebookSearch" type="search" placeholder="بحث باسم المدرس أو المادة أو التاسك" /><select
-            id="facebookClientFilter">
-            <option value="all">كل العملاء</option>
-          </select><select id="facebookStatusFilter">
-            <option value="all">كل الحالات</option>
-            <option value="pending">المتبقي</option>
-            <option value="done">المنتهي</option>
-          </select><select id="facebookTypeFilter">
-            <option value="all">كل أنواع التاسكات</option>
-            <option value="design">تصميم</option>
-            <option value="video">فيديو</option>
-            <option value="mixed-post">بوست منوع</option>
-            <option value="reel">ريل</option>
-          </select>
+
+        <div class="package-buttons">
+          <button class="package-btn" onclick="openTeacherModal('facebook', 'face 1')">face 1</button>
+          <button class="package-btn" onclick="openTeacherModal('facebook', 'face 2')">face 2</button>
+          <button class="package-btn" onclick="openTeacherModal('facebook', 'face 3')">face 3</button>
         </div>
-        <div id="facebookBoard" class="packages-board"></div>
+
+        <div id="facebookCards" class="cards"></div>
       </div>
     </section>
-    <section id="youtubePanel" class="section-panel">
-      <div class="panel-card">
-        <div class="panel-head">
-          <div>
-            <h2>عملاء باكدجات اليوتيوب</h2>
-            <p>كل مدرس له مكان مستقل، وتتم إضافة التاسكات يدويًا.</p>
+
+    <section id="youtubeView" class="view-section">
+      <div class="back-row">
+        <button class="back-btn" onclick="goHome()">↩ رجوع للأقسام</button>
+      </div>
+
+      <div class="top-actions">
+        <input id="youtubeSearchInput" class="search-box" type="text" placeholder="ابحث باسم المدرس، المادة، المحافظة، أو نوع الباكدج..." oninput="syncSearch(this.value)" />
+        <button class="btn btn-dark" onclick="resetAllData()">مسح كل البيانات</button>
+      </div>
+
+      <div class="section">
+        <div class="section-header">
+          <div class="section-title">
+            <h2>باكدجات يوتيوب</h2>
+            <span class="badge" id="youtubeCount">0</span>
           </div>
         </div>
-        <div class="stats" id="youtubeStats"></div>
-        <div class="filters">
-          <input id="youtubeSearch" type="search" placeholder="بحث باسم المدرس أو المادة أو التاسك" /><select
-            id="youtubeClientFilter">
-            <option value="all">كل العملاء</option>
-          </select><select id="youtubeStatusFilter">
-            <option value="all">كل الحالات</option>
-            <option value="pending">المتبقي</option>
-            <option value="done">المنتهي</option>
-          </select><select id="youtubeTypeFilter">
-            <option value="all">كل أنواع التاسكات</option>
-            <option value="design">تصميم</option>
-            <option value="video">فيديو</option>
-            <option value="mixed-post">بوست منوع</option>
-            <option value="reel">ريل</option>
-          </select>
+
+        <div class="package-buttons">
+          <button class="package-btn" onclick="openTeacherModal('youtube', 'youtube 1')">youtube 1</button>
+          <button class="package-btn" onclick="openTeacherModal('youtube', 'youtube 2')">youtube 2</button>
+          <button class="package-btn" onclick="openTeacherModal('youtube', 'youtube 3')">youtube 3</button>
         </div>
-        <div id="youtubeBoard" class="packages-board"></div>
+
+        <div id="youtubeCards" class="cards"></div>
       </div>
     </section>
-    <section id="schedulePanel" class="section-panel">
-      <div class="panel-card">
-        <div class="panel-head">
-          <div>
-            <h2>جدول تصوير الاستوديو</h2>
-            <p>
-              7 أزرار لأيام الأسبوع، وداخل كل يوم تظهر مواعيد تصوير اليوتيوب
-              المحجوزة.
-            </p>
+
+    <section id="studiosView" class="view-section">
+      <div class="back-row">
+        <button class="back-btn" onclick="goHome()">↩ رجوع للأقسام</button>
+      </div>
+
+      <section class="section">
+        <div class="section-header">
+          <div class="section-title">
+            <h2 id="timelineTitle">جدول استوديو السادات</h2>
+            <span class="badge">8 صباحاً - 2 صباحاً</span>
           </div>
         </div>
-        <form id="studioBookingForm" class="shooting-booking-fields active">
-          <h3 style="margin: 0 0 8px">إضافة حجز تصوير يدوي</h3>
-          <p class="hint">
-            اختار المدرس من الباكدجات المسجلة وحدد نوع التصوير ومدة الحجز وهل
-            هو مرة واحدة أو متكرر أسبوعيًا.
-          </p>
-
-          <div class="two-cols">
-            <div class="form-row">
-              <label for="studioTeacherSelect">اختيار المدرس</label>
-              <select id="studioTeacherSelect" required>
-                <option value="">اختر المدرس</option>
-              </select>
-            </div>
-
-            <div class="form-row">
-              <label for="studioShootType">نوع التصوير</label>
-              <select id="studioShootType" required>
-                <option value="reel">ريل</option>
-                <option value="lesson">شرح</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="two-cols">
-            <div class="form-row">
-              <label for="studioDay">يوم التصوير</label>
-              <select id="studioDay" required>
-                <option value="السبت">السبت</option>
-                <option value="الأحد">الأحد</option>
-                <option value="الإثنين">الإثنين</option>
-                <option value="الثلاثاء">الثلاثاء</option>
-                <option value="الأربعاء">الأربعاء</option>
-                <option value="الخميس">الخميس</option>
-                <option value="الجمعة">الجمعة</option>
-              </select>
-            </div>
-
-            <div class="form-row">
-              <label for="studioTime">ميعاد التصوير</label>
-              <input id="studioTime" type="text" placeholder="مثال: 3:00 م - 5:00 م" required />
-            </div>
-          </div>
-
-          <div class="two-cols">
-            <div class="form-row">
-              <label for="studioDuration">مدة التصوير</label>
-              <input id="studioDuration" type="text" placeholder="مثال: ساعتين / 90 دقيقة" required />
-            </div>
-
-            <div class="form-row">
-              <label for="studioRepeat">تكرار الحجز</label>
-              <select id="studioRepeat" required>
-                <option value="once">مرة واحدة</option>
-                <option value="weekly">
-                  متكرر كل أسبوع حتى نهاية مدة الباكدج
-                </option>
-              </select>
-            </div>
-          </div>
-
-          <div class="form-row">
-            <label for="studioNotes">ملاحظات الحجز</label>
-            <textarea id="studioNotes" placeholder="مثال: تصوير 3 ريلز / شرح فصل كامل / تجهيز إضاءة خاصة"></textarea>
-          </div>
-
-          <div class="btns">
-            <button class="primary" type="submit">حفظ حجز التصوير</button>
-          </div>
-        </form>
-        <div class="stats" id="shootingStats"></div>
-        <div id="shootingScheduleDays" class="schedule-days"></div>
-        <div id="shootingScheduleList" class="booking-list"></div>
-      </div>
+        <p style="color:#6b7280; margin-bottom: 12px;">اختار الاستوديو من الأزرار، واكتب المعاد أو المهمة داخل الخانة. أي خانة يتم تحديدها ستظهر بلون مختلف تلقائياً.</p>
+        <div class="studio-tabs">
+          <button id="sadatStudioBtn" class="studio-btn active" onclick="switchStudio('sadat')">جدول استوديو السادات</button>
+          <button id="shebinStudioBtn" class="studio-btn" onclick="switchStudio('shebin')">جدول استوديو شبين</button>
+        </div>
+        <div class="timeline-table-wrapper">
+          <table class="timeline-table" id="dailyTimeline"></table>
+        </div>
+      </section>
     </section>
   </main>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const supabaseUrl = "https://plhskxesiaaflahnqyix.supabase.co";
-      const supabaseAnonKey =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBsaHNreGVzaWFhZmxhaG5xeWl4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkwMzEzOTcsImV4cCI6MjA5NDYwNzM5N30.bQDo5rkW9Vll5b4RqyedlHwgWXAfacPPpiZBio30IIw";
 
-      const hasSupabaseConfig =
-        supabaseUrl &&
-        supabaseAnonKey &&
-        !supabaseUrl.includes("PUT_YOUR") &&
-        !supabaseAnonKey.includes("PUT_YOUR") &&
-        window.supabase;
-      const supabaseClient = hasSupabaseConfig
-        ? window.supabase.createClient(supabaseUrl, supabaseAnonKey)
-        : null;
-      let useSupabase = Boolean(supabaseClient);
-      const taskTypes = {
-        design: "تصميم",
-        video: "فيديو",
-        "mixed-post": "بوست منوع",
-        reel: "ريل",
-      };
-      const weekDays = [
-        "السبت",
-        "الأحد",
-        "الإثنين",
-        "الثلاثاء",
-        "الأربعاء",
-        "الخميس",
-        "الجمعة",
-      ];
-      let selectedShootingDay = weekDays[0];
-      let clients = [];
-      let tasks = [];
-      let studioBookings = [];
-      const $ = (id) => document.getElementById(id);
-      const refs = {
-        totalClients: $("totalClients"),
-        dbStatus: $("dbStatus"),
-        clientForm: $("clientForm"),
-        clientList: $("clientList"),
-        startDate: $("startDate"),
-        duration: $("duration"),
-        teacherName: $("teacherName"),
-        subjectName: $("subjectName"),
-        packageName: $("packageName"),
-        packagePlatform: $("packagePlatform"),
-        packageDetails: $("packageDetails"),
-        packageTotalTasks: $("packageTotalTasks"),
-        studioBookingForm: $("studioBookingForm"),
-        studioTeacherSelect: $("studioTeacherSelect"),
-        studioShootType: $("studioShootType"),
-        studioDay: $("studioDay"),
-        studioTime: $("studioTime"),
-        studioDuration: $("studioDuration"),
-        studioRepeat: $("studioRepeat"),
-        studioNotes: $("studioNotes"),
-        exportCsv: $("exportCsv"),
-        clearAll: $("clearAll"),
-        shootingStats: $("shootingStats"),
-        shootingScheduleDays: $("shootingScheduleDays"),
-        shootingScheduleList: $("shootingScheduleList"),
-      };
-      refs.startDate.valueAsDate = new Date();
-      refs.dbStatus.textContent = useSupabase ? "Supabase متصل" : "وضع محلي";
-      refs.dbStatus.classList.toggle("online", useSupabase);
-      refs.dbStatus.classList.toggle("local", !useSupabase);
-
-      function escapeHTML(value) {
-        return String(value ?? "")
-          .replaceAll("&", "&amp;")
-          .replaceAll("<", "&lt;")
-          .replaceAll(">", "&gt;")
-          .replaceAll('"', "&quot;")
-          .replaceAll("'", "&#039;");
-      }
-      function formatDate(dateString) {
-        if (!dateString) return "-";
-        return new Date(dateString + "T12:00:00").toLocaleDateString(
-          "ar-EG",
-          { year: "numeric", month: "short", day: "numeric" },
-        );
-      }
-      function addMonths(dateString, months) {
-        const date = new Date(dateString + "T12:00:00");
-        date.setMonth(date.getMonth() + Number(months));
-        date.setDate(date.getDate() - 1);
-        return date.toISOString().slice(0, 10);
-      }
-      function getClientTasks(clientId) {
-        return tasks.filter((task) => task.clientId === clientId);
-      }
-      function getPackageInfo(client) {
-        return {
-          name: client.packageName || "باكدج بدون اسم",
-          platform: client.packagePlatform || "facebook",
-          summary: client.packageDetails || "",
-          totalTasks: Number(client.packageTotalTasks || 0),
-        };
-      }
-      function getPackageTotal(client) {
-        return (
-          getPackageInfo(client).totalTasks * Number(client.duration || 1)
-        );
-      }
-      function getRemainingTasks(client) {
-        return Math.max(
-          getPackageTotal(client) - getClientTasks(client.id).length,
-          0,
-        );
-      }
-      function isYoutubeClient(client) {
-        return getPackageInfo(client).platform === "youtube";
-      }
-      function getBooking(client) {
-        return (
-          studioBookings.find((booking) => booking.clientId === client.id) ||
-          null
-        );
-      }
-      function saveLocal() {
-        localStorage.setItem(
-          "teacherPackageClientsSupabaseFixed",
-          JSON.stringify(clients),
-        );
-        localStorage.setItem(
-          "teacherPackageTasksSupabaseFixed",
-          JSON.stringify(tasks),
-        );
-        localStorage.setItem(
-          "teacherPackageStudioBookings",
-          JSON.stringify(studioBookings),
-        );
-      }
-      function loadLocal() {
-        clients = JSON.parse(
-          localStorage.getItem("teacherPackageClientsSupabaseFixed") || "[]",
-        );
-        tasks = JSON.parse(
-          localStorage.getItem("teacherPackageTasksSupabaseFixed") || "[]",
-        );
-        studioBookings = JSON.parse(
-          localStorage.getItem("teacherPackageStudioBookings") || "[]",
-        );
-      }
-      function mapClientFromDb(row) {
-        return {
-          id: row.id,
-          teacherName: row.teacher_name || "",
-          subjectName: row.subject_name || "",
-          startDate: row.start_date || "",
-          duration: String(row.duration || 1),
-          packageName: row.package_name || "",
-          packagePlatform: row.package_platform || "facebook",
-          packageDetails: row.package_details || "",
-          packageTotalTasks: Number(row.package_total_tasks || 0),
-          shootingBooking: row.shooting_booking || null,
-          createdAt: row.created_at || new Date().toISOString(),
-        };
-      }
-      function mapTaskFromDb(row) {
-        return {
-          id: row.id,
-          clientId: row.client_id,
-          type: row.type,
-          details: row.details || "",
-          executeDate: row.execute_date || "",
-          uploadDate: row.upload_date || "",
-          done: Boolean(row.done),
-          createdAt: row.created_at || new Date().toISOString(),
-        };
-      }
-      function mapClientToDb(client) {
-        return {
-          id: client.id,
-          teacher_name: client.teacherName,
-          subject_name: client.subjectName,
-          start_date: client.startDate,
-          duration: Number(client.duration),
-          package_name: client.packageName,
-          package_platform: client.packagePlatform,
-          package_details: client.packageDetails,
-          package_total_tasks: Number(client.packageTotalTasks),
-          shooting_booking: client.shootingBooking || null,
-          created_at: client.createdAt,
-        };
-      }
-      function mapTaskToDb(task) {
-        return {
-          id: task.id,
-          client_id: task.clientId,
-          type: task.type,
-          details: task.details,
-          execute_date: task.executeDate,
-          upload_date: task.uploadDate,
-          done: Boolean(task.done),
-          created_at: task.createdAt,
-        };
-      }
-      function mapStudioBookingFromDb(row) {
-        return {
-          id: row.id,
-          clientId: row.client_id,
-          shootType: row.shoot_type,
-          day: row.day,
-          time: row.time,
-          duration: row.duration,
-          repeat: row.repeat || "once",
-          notes: row.notes || "",
-          createdAt: row.created_at || new Date().toISOString(),
-        };
-      }
-
-      function mapStudioBookingToDb(booking) {
-        return {
-          id: booking.id,
-          client_id: booking.clientId,
-          shoot_type: booking.shootType,
-          day: booking.day,
-          time: booking.time,
-          duration: booking.duration,
-          repeat: booking.repeat || "once",
-          notes: booking.notes || "",
-          created_at: booking.createdAt,
-        };
-      }
-      async function loadData() {
-        if (!useSupabase) {
-          loadLocal();
-          render();
-          return;
-        }
-        try {
-          document.body.classList.add("loading");
-          const [
-            { data: dbClients, error: clientsError },
-            { data: dbTasks, error: tasksError },
-            { data: dbStudioBookings, error: studioBookingsError },
-          ] = await Promise.all([
-            supabaseClient
-              .from("clients")
-              .select("*")
-              .order("created_at", { ascending: false }),
-            supabaseClient
-              .from("tasks")
-              .select("*")
-              .order("created_at", { ascending: false }),
-            supabaseClient
-              .from("studio_bookings")
-              .select("*")
-              .order("created_at", { ascending: false }),
-          ]);
-          if (clientsError || tasksError || studioBookingsError) {
-            throw clientsError || tasksError || studioBookingsError;
-          }
-          clients = (dbClients || []).map(mapClientFromDb);
-          tasks = (dbTasks || []).map(mapTaskFromDb);
-          studioBookings = (dbStudioBookings || []).map(
-            mapStudioBookingFromDb,
-          );
-          saveLocal();
-          render();
-        } catch (err) {
-          console.error(err);
-          useSupabase = false;
-          refs.dbStatus.textContent = "وضع محلي - تعذر اتصال Supabase";
-          refs.dbStatus.classList.remove("online");
-          refs.dbStatus.classList.add("local");
-          loadLocal();
-          render();
-          alert(
-            "تعذر تحميل Supabase، الموقع اشتغل مؤقتًا على التخزين المحلي.",
-          );
-        } finally {
-          document.body.classList.remove("loading");
-        }
-      }
-      async function saveData() {
-        saveLocal();
-        if (!useSupabase) {
-          return;
-        }
-        try {
-          const dbClients = clients.map(mapClientToDb);
-          const dbTasks = tasks.map(mapTaskToDb);
-          const dbStudioBookings = studioBookings.map(mapStudioBookingToDb);
-          const { error: upsertClientsError } = await supabaseClient
-            .from("clients")
-            .upsert(dbClients, { onConflict: "id" });
-          if (upsertClientsError) throw upsertClientsError;
-          if (dbTasks.length) {
-            const { error: upsertTasksError } = await supabaseClient
-              .from("tasks")
-              .upsert(dbTasks, { onConflict: "id" });
-            if (upsertTasksError) throw upsertTasksError;
-          }
-          if (dbStudioBookings.length) {
-            const { error: upsertStudioBookingsError } = await supabaseClient
-              .from("studio_bookings")
-              .upsert(dbStudioBookings, { onConflict: "id" });
-
-            if (upsertStudioBookingsError) throw upsertStudioBookingsError;
-          }
-        } catch (err) {
-          console.error(err);
-          alert(
-            "البيانات اتحفظت محليًا، لكن حصلت مشكلة في Supabase. راجع إعدادات المشروع والجداول.",
-          );
-        }
-      }
-      function showPanel(targetId) {
-        document
-          .querySelectorAll(".section-btn")
-          .forEach((btn) =>
-            btn.classList.toggle("active", btn.dataset.target === targetId),
-          );
-        document
-          .querySelectorAll(".section-panel")
-          .forEach((panel) =>
-            panel.classList.toggle("active", panel.id === targetId),
-          );
-        if (targetId === "schedulePanel") renderShootingSchedule();
-      }
-      document
-        .querySelectorAll(".section-btn")
-        .forEach((button) =>
-          button.addEventListener("click", () =>
-            showPanel(button.dataset.target),
-          ),
-        );
-
-      refs.clientForm.addEventListener("submit", async (event) => {
-        event.preventDefault();
-        const selectedPlatform = refs.packagePlatform.value;
-
-        const client = {
-          id: crypto.randomUUID(),
-          teacherName: refs.teacherName.value.trim(),
-          subjectName: refs.subjectName.value.trim(),
-          startDate: refs.startDate.value,
-          duration: refs.duration.value,
-          packageName: refs.packageName.value.trim(),
-          packagePlatform: selectedPlatform,
-          packageDetails: refs.packageDetails.value.trim(),
-          packageTotalTasks: Number(refs.packageTotalTasks.value),
-          createdAt: new Date().toISOString(),
-        };
-        if (
-          !client.teacherName ||
-          !client.subjectName ||
-          !client.startDate ||
-          !client.packageName ||
-          !client.packageDetails ||
-          !client.packageTotalTasks
-        )
-          return;
-        clients.unshift(client);
-        await saveData();
-        refs.clientForm.reset();
-        refs.startDate.valueAsDate = new Date();
-        render();
-        showPanel(
-          selectedPlatform === "facebook" ? "facebookPanel" : "youtubePanel",
-        );
-      });
-      window.openClientPackage = (clientId) => {
-        const client = clients.find((item) => item.id === clientId);
-        if (!client) return;
-        const platform = getPackageInfo(client).platform;
-        showPanel(platform === "facebook" ? "facebookPanel" : "youtubePanel");
-        const filter = $(platform + "ClientFilter");
-        if (filter) {
-          filter.value = clientId;
-          renderBoards();
-        }
-      };
-      window.toggleTaskForm = (clientId) => {
-        $("taskForm-" + clientId)?.classList.toggle("active");
-      };
-      window.addManualTask = async (event, clientId) => {
-        event.preventDefault();
-        const form = event.target;
-        const client = clients.find((item) => item.id === clientId);
-        if (!client) return;
-        if (getClientTasks(clientId).length >= getPackageTotal(client)) {
-          alert("تم الوصول إلى إجمالي عدد التاسكات داخل الباقة لهذا العميل.");
-          return;
-        }
-        const task = {
-          id: crypto.randomUUID(),
-          clientId,
-          type: form.taskType.value,
-          details: form.taskDetails.value.trim(),
-          executeDate: form.executeDate.value,
-          uploadDate: form.uploadDate.value,
-          done: false,
-          createdAt: new Date().toISOString(),
-        };
-        if (!task.details || !task.executeDate || !task.uploadDate) return;
-        tasks.unshift(task);
-        await saveData();
-        form.reset();
-        render();
-        $("taskForm-" + clientId)?.classList.add("active");
-      };
-      window.toggleTask = async (taskId) => {
-        tasks = tasks.map((task) =>
-          task.id === taskId ? { ...task, done: !task.done } : task,
-        );
-        await saveData();
-        render();
-      };
-      window.deleteTask = async (taskId) => {
-        if (!confirm("هل تريد حذف هذا التاسك؟")) return;
-        tasks = tasks.filter((task) => task.id !== taskId);
-        if (useSupabase) {
-          try {
-            await supabaseClient.from("tasks").delete().eq("id", taskId);
-          } catch (e) {
-            console.error(e);
-          }
-        }
-        await saveData();
-        render();
-      };
-      window.deleteClient = async (clientId) => {
-        if (!confirm("سيتم حذف العميل وكل التاسكات الخاصة به. هل أنت متأكد؟"))
-          return;
-        clients = clients.filter((client) => client.id !== clientId);
-        tasks = tasks.filter((task) => task.clientId !== clientId);
-        studioBookings = studioBookings.filter(
-          (booking) => booking.clientId !== clientId,
-        );
-        if (useSupabase) {
-          try {
-            await supabaseClient
-              .from("studio_bookings")
-              .delete()
-              .eq("client_id", clientId);
-            await supabaseClient.from("clients").delete().eq("id", clientId);
-          } catch (e) {
-            console.error(e);
-          }
-        }
-        await saveData();
-        render();
-      };
-      function renderClientList() {
-        refs.totalClients.textContent = clients.length;
-        if (!clients.length) {
-          refs.clientList.innerHTML =
-            '<div class="empty">لا يوجد عملاء حتى الآن</div>';
-          return;
-        }
-        refs.clientList.innerHTML = clients
-          .map((client) => {
-            const pack = getPackageInfo(client);
-            const added = getClientTasks(client.id).length;
-            const total = getPackageTotal(client);
-            const remaining = getRemainingTasks(client);
-            const booking = getBooking(client);
-            return `<div class="client-card" onclick="openClientPackage('${client.id}')"><strong>${escapeHTML(client.teacherName)}</strong><span>${escapeHTML(client.subjectName)} • ${escapeHTML(pack.name)} • ${pack.platform === "youtube" ? "يوتيوب" : "فيس بوك"}</span><br><span>الاشتراك: ${formatDate(client.startDate)} • الانتهاء: ${formatDate(addMonths(client.startDate, Number(client.duration)))}</span><br><span>التاسكات المضافة: ${added}/${total} • المتبقي للإضافة: ${remaining}</span>${booking ? `<br><span>تصوير: ${escapeHTML(booking.day)} • ${escapeHTML(booking.time)}</span>` : ""}</div>`;
-          })
-          .join("");
-      }
-      function renderPlatformFilters(platform) {
-        const clientFilter = $(platform + "ClientFilter");
-        const current = clientFilter.value;
-        clientFilter.innerHTML = '<option value="all">كل العملاء</option>';
-        clients
-          .filter((client) => getPackageInfo(client).platform === platform)
-          .forEach((client) => {
-            const option = document.createElement("option");
-            option.value = client.id;
-            option.textContent = `${client.teacherName} - ${client.subjectName}`;
-            clientFilter.appendChild(option);
-          });
-        clientFilter.value = [...clientFilter.options].some(
-          (option) => option.value === current,
-        )
-          ? current
-          : "all";
-      }
-      function getFilteredClients(platform) {
-        const search = $(platform + "Search")
-          .value.trim()
-          .toLowerCase();
-        const clientFilter = $(platform + "ClientFilter").value;
-        const statusFilter = $(platform + "StatusFilter").value;
-        const typeFilter = $(platform + "TypeFilter").value;
-        return clients
-          .filter((client) => getPackageInfo(client).platform === platform)
-          .filter(
-            (client) => clientFilter === "all" || client.id === clientFilter,
-          )
-          .filter((client) => {
-            const clientTasks = getClientTasks(client.id);
-            const searchableTasks = clientTasks
-              .map((task) => `${task.details} ${taskTypes[task.type]}`)
-              .join(" ");
-            const pack = getPackageInfo(client);
-            const searchable =
-              `${client.teacherName} ${client.subjectName} ${pack.name} ${pack.summary} ${searchableTasks}`.toLowerCase();
-            return !search || searchable.includes(search);
-          })
-          .map((client) => {
-            const visibleTasks = getClientTasks(client.id)
-              .filter(
-                (task) =>
-                  statusFilter === "all" ||
-                  (statusFilter === "done" ? task.done : !task.done),
-              )
-              .filter(
-                (task) => typeFilter === "all" || task.type === typeFilter,
-              );
-            return { ...client, visibleTasks };
-          });
-      }
-      function renderStats(platform, filteredClients) {
-        const platformTasks = filteredClients.flatMap(
-          (client) => client.visibleTasks || [],
-        );
-        const added = platformTasks.length;
-        const done = platformTasks.filter((task) => task.done).length;
-        const pending = added - done;
-        const totalPackageTasks = filteredClients.reduce(
-          (sum, client) => sum + getPackageTotal(client),
-          0,
-        );
-        const remainingToAdd = Math.max(
-          totalPackageTasks -
-          filteredClients.reduce(
-            (sum, client) => sum + getClientTasks(client.id).length,
-            0,
-          ),
-          0,
-        );
-        $(platform + "Stats").innerHTML =
-          `<div class="stat"><span>إجمالي التاسكات داخل الباقات</span><strong>${totalPackageTasks}</strong></div><div class="stat"><span>التاسكات المضافة</span><strong>${added}</strong></div><div class="stat"><span>المتبقي للإضافة</span><strong>${remainingToAdd}</strong></div><div class="stat"><span>المتبقي للتنفيذ</span><strong>${pending}</strong></div>`;
-      }
-      function renderBoards() {
-        ["facebook", "youtube"].forEach((platform) => {
-          renderPlatformFilters(platform);
-          const filteredClients = getFilteredClients(platform);
-          renderStats(platform, filteredClients);
-          const board = $(platform + "Board");
-          if (!filteredClients.length) {
-            board.innerHTML =
-              '<div class="empty">لا يوجد عملاء في هذا القسم حتى الآن</div>';
-            return;
-          }
-          board.innerHTML = filteredClients.map(renderClientPackage).join("");
-        });
-        renderShootingSchedule();
-      }
-      function renderClientPackage(client) {
-        const pack = getPackageInfo(client);
-        const allClientTasks = getClientTasks(client.id);
-        const total = getPackageTotal(client);
-        const added = allClientTasks.length;
-        const remaining = getRemainingTasks(client);
-        const done = allClientTasks.filter((task) => task.done).length;
-        const endDate = addMonths(client.startDate, Number(client.duration));
-        const booking = getBooking(client);
-        const visibleTasks = client.visibleTasks || allClientTasks;
-        const tasksHtml = visibleTasks.length
-          ? `<div class="tasks-table-wrap"><table><thead><tr><th>تم؟</th><th>نوع التاسك</th><th>تفاصيل التاسك</th><th>تاريخ التنفيذ</th><th>تاريخ الرفع</th><th>الحالة</th><th>إجراءات</th></tr></thead><tbody>${visibleTasks.map((task) => `<tr class="${task.done ? "done-row" : ""}"><td><input type="checkbox" ${task.done ? "checked" : ""} onchange="toggleTask('${task.id}')"></td><td><span class="chip">${taskTypes[task.type]}</span></td><td class="task-details">${escapeHTML(task.details)}</td><td>${formatDate(task.executeDate)}</td><td>${formatDate(task.uploadDate)}</td><td><span class="status-pill ${task.done ? "done" : ""}">${task.done ? "تم" : "متبقي"}</span></td><td><button class="danger" type="button" onclick="deleteTask('${task.id}')">حذف</button></td></tr>`).join("")}</tbody></table></div>`
-          : '<div class="empty">لم تتم إضافة أي تاسكات مطابقة للفلاتر الحالية</div>';
-        return `<article class="teacher-package"><div class="package-head"><div><h3>${escapeHTML(client.teacherName)}</h3><div class="package-meta"><span>${escapeHTML(client.subjectName)}</span><span>•</span><span>${escapeHTML(pack.name)}</span><span>•</span><span>${pack.platform === "youtube" ? "يوتيوب" : "فيس بوك"}</span><span>•</span><span>${escapeHTML(pack.summary)}</span>${booking ? `<span>•</span><span class="chip green">تصوير: ${escapeHTML(booking.day)} - ${escapeHTML(booking.time)}</span>` : ""}</div></div><div class="package-actions"><button class="success" type="button" onclick="toggleTaskForm('${client.id}')">+ إضافة تاسك</button><button class="danger" type="button" onclick="deleteClient('${client.id}')">حذف العميل</button></div></div><div class="package-body"><div class="stats" style="margin-bottom:0;"><div class="stat"><span>تاريخ الاشتراك</span><strong>${formatDate(client.startDate)}</strong></div><div class="stat"><span>تاريخ الانتهاء</span><strong>${formatDate(endDate)}</strong></div><div class="stat"><span>إجمالي التاسكات</span><strong>${total}</strong></div><div class="stat"><span>مضافة / متبقية</span><strong>${added} / ${remaining}</strong></div></div><div class="stats" style="margin-bottom:0;"><div class="stat"><span>تم تنفيذها</span><strong>${done}</strong></div><div class="stat"><span>باقي تنفيذها</span><strong>${Math.max(added - done, 0)}</strong></div><div class="stat"><span>مدة الاشتراك</span><strong>${client.duration} شهر</strong></div><div class="stat"><span>حالة إضافة التاسكات</span><strong>${remaining === 0 ? "مكتملة" : "ناقصة"}</strong></div></div><form id="taskForm-${client.id}" class="task-form" onsubmit="addManualTask(event,'${client.id}')"><div class="two-cols"><div class="form-row"><label>نوع التاسك</label><select name="taskType" required><option value="design">تصميم</option><option value="video">فيديو</option><option value="mixed-post">بوست منوع</option><option value="reel">ريل</option></select></div><div class="form-row"><label>تاريخ التنفيذ</label><input name="executeDate" type="date" required></div></div><div class="two-cols"><div class="form-row"><label>تاريخ الرفع</label><input name="uploadDate" type="date" required></div><div class="form-row"><label>عدد التاسكات المتبقية للإضافة</label><input type="text" value="${remaining}" disabled></div></div><div class="form-row"><label>تفاصيل التاسك</label><textarea name="taskDetails" placeholder="اكتب تفاصيل التاسك هنا..." required></textarea></div><div class="btns"><button class="primary" type="submit">حفظ التاسك</button><button class="secondary" type="button" onclick="toggleTaskForm('${client.id}')">إغلاق</button></div></form>${tasksHtml}</div></article>`;
-      }
-      function renderStudioTeacherOptions() {
-        if (!refs.studioTeacherSelect) return;
-
-        const currentValue = refs.studioTeacherSelect.value;
-        refs.studioTeacherSelect.innerHTML =
-          '<option value="">اختر المدرس</option>';
-
-        clients.forEach((client) => {
-          const option = document.createElement("option");
-          option.value = client.id;
-          option.textContent = `${client.teacherName} - ${client.subjectName} - ${client.packageName}`;
-          refs.studioTeacherSelect.appendChild(option);
-        });
-
-        refs.studioTeacherSelect.value = clients.some(
-          (client) => client.id === currentValue,
-        )
-          ? currentValue
-          : "";
-      }
-
-      function getShootTypeLabel(type) {
-        if (type === "reel") return "ريل";
-        if (type === "lesson") return "شرح";
-        return type || "-";
-      }
-
-      function getRepeatLabel(repeat) {
-        return repeat === "weekly"
-          ? "متكرر أسبوعيًا حتى نهاية مدة الباكدج"
-          : "مرة واحدة";
-      }
-
-      window.deleteStudioBooking = async (bookingId) => {
-        if (!confirm("هل تريد حذف حجز التصوير؟")) return;
-
-        studioBookings = studioBookings.filter(
-          (booking) => booking.id !== bookingId,
-        );
-
-        if (useSupabase) {
-          try {
-            await supabaseClient
-              .from("studio_bookings")
-              .delete()
-              .eq("id", bookingId);
-          } catch (e) {
-            console.error(e);
-          }
-        }
-
-        await saveData();
-        render();
-      };
-      function renderShootingSchedule() {
-        if (!refs.shootingScheduleDays) return;
-
-        renderStudioTeacherOptions();
-
-        const bookings = studioBookings
-          .map((booking) => ({
-            booking,
-            client: clients.find((client) => client.id === booking.clientId),
-          }))
-          .filter((item) => item.client);
-
-        refs.shootingStats.innerHTML = `
-    <div class="stat"><span>إجمالي الحجوزات</span><strong>${bookings.length}</strong></div>
-    <div class="stat"><span>اليوم المحدد</span><strong>${selectedShootingDay}</strong></div>
-    <div class="stat"><span>حجوزات اليوم</span><strong>${bookings.filter((item) => item.booking.day === selectedShootingDay).length}</strong></div>
-    <div class="stat"><span>حجوزات متكررة</span><strong>${bookings.filter((item) => item.booking.repeat === "weekly").length}</strong></div>
-  `;
-
-        refs.shootingScheduleDays.innerHTML = weekDays
-          .map(
-            (day) => `
-    <button class="day-btn ${day === selectedShootingDay ? "active" : ""}" type="button" data-day="${day}">
-      ${day}<br>
-      <small>${bookings.filter((item) => item.booking.day === day).length} حجز</small>
-    </button>
-  `,
-          )
-          .join("");
-
-        refs.shootingScheduleDays
-          .querySelectorAll(".day-btn")
-          .forEach((button) => {
-            button.addEventListener("click", () => {
-              selectedShootingDay = button.dataset.day;
-              renderShootingSchedule();
-            });
-          });
-
-        const dayBookings = bookings.filter(
-          (item) => item.booking.day === selectedShootingDay,
-        );
-
-        refs.shootingScheduleList.innerHTML = dayBookings.length
-          ? dayBookings
-            .map(({ client, booking }) => {
-              const endDate = addMonths(
-                client.startDate,
-                Number(client.duration),
-              );
-
-              return `
-      <div class="booking-card">
-        <strong>${escapeHTML(client.teacherName)}</strong>
-        <p>${escapeHTML(client.subjectName)} • ${escapeHTML(client.packageName)}</p>
-        <p><b>نوع التصوير:</b> ${getShootTypeLabel(booking.shootType)}</p>
-        <p><b>ميعاد التصوير:</b> ${escapeHTML(booking.time)}</p>
-        <p><b>مدة التصوير:</b> ${escapeHTML(booking.duration)}</p>
-        <p><b>التكرار:</b> ${getRepeatLabel(booking.repeat)}</p>
-        ${booking.repeat === "weekly" ? `<p><b>حتى تاريخ:</b> ${formatDate(endDate)}</p>` : ""}
-        ${booking.notes ? `<p><b>ملاحظات:</b> ${escapeHTML(booking.notes)}</p>` : ""}
-        <div class="btns">
-          <button class="danger" type="button" onclick="deleteStudioBooking('${booking.id}')">حذف الحجز</button>
-        </div>
+  <div class="modal" id="teacherModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="teacherModalTitle">إضافة مدرس</h2>
+        <button class="close-btn" onclick="closeModal('teacherModal')">إغلاق</button>
       </div>
-    `;
-            })
-            .join("")
-          : `<div class="empty">لا توجد حجوزات تصوير في يوم ${selectedShootingDay}</div>`;
+
+      <form id="teacherForm" onsubmit="saveTeacher(event)">
+        <div class="form-grid">
+          <div>
+            <label>اسم المدرس</label>
+            <input id="teacherName" type="text" required placeholder="مثال: أ/ محمد أحمد" />
+          </div>
+          <div>
+            <label>المادة</label>
+            <input id="subject" type="text" required placeholder="مثال: فيزياء" />
+          </div>
+          <div>
+            <label>المحافظة</label>
+            <input id="governorate" type="text" required placeholder="مثال: القاهرة" />
+          </div>
+          <div>
+            <label>تاريخ الاشتراك</label>
+            <input id="subscriptionDate" type="date" required />
+          </div>
+          <div class="full">
+            <label>تفاصيل إضافية</label>
+            <textarea id="extraDetails" placeholder="اكتب أي ملاحظات خاصة بالمدرس أو طريقة الشغل..."></textarea>
+          </div>
+          <div class="full">
+            <button class="btn btn-primary" type="submit">حفظ المدرس والباكدج</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal" id="detailsModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="detailsTitle">تفاصيل الباكدج</h2>
+        <button class="close-btn" onclick="closeModal('detailsModal')">إغلاق</button>
+      </div>
+      <div id="detailsContent"></div>
+    </div>
+  </div>
+
+  <script>
+    const packageTemplates = {
+      "face 1": [
+        { type: "تصميم سوشيال ميديا", count: 4 },
+        { type: "بوست متنوع", count: 4 },
+        { type: "ريل", count: 2 }
+      ],
+      "face 2": [
+        { type: "تصميم سوشيال ميديا", count: 8 },
+        { type: "بوست متنوع", count: 4 },
+        { type: "ريل", count: 4 }
+      ],
+      "face 3": [
+        { type: "تصميم سوشيال ميديا", count: 8 },
+        { type: "بوست متنوع", count: 8 },
+        { type: "ريلز", count: 8 }
+      ],
+      "youtube 1": [
+        { type: "تصوير استوديو", count: 8, unit: "ساعة" },
+        { type: "تصميم", count: 5 },
+        { type: "ريل من الشرح", count: 4 }
+      ],
+      "youtube 2": [
+        { type: "تصوير استوديو", count: 16, unit: "ساعة" },
+        { type: "تصميم", count: 10 },
+        { type: "ريل من الشرح", count: 8 }
+      ],
+      "youtube 3": [
+        { type: "تصوير استوديو", count: 24, unit: "ساعة" },
+        { type: "تصميم", count: 12 },
+        { type: "ريل من الشرح", count: 12 }
+      ]
+    };
+
+    const days = ["السبت", "الأحد", "الاثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة"];
+    const hours = ["8 ص", "9 ص", "10 ص", "11 ص", "12 م", "1 م", "2 م", "3 م", "4 م", "5 م", "6 م", "7 م", "8 م", "9 م", "10 م", "11 م", "12 ص", "1 ص", "2 ص"];
+
+    let selectedCategory = "";
+    let selectedPackage = "";
+    let selectedTeacherId = null;
+    let selectedTaskTypeByTeacher = {};
+
+    let teachers = JSON.parse(localStorage.getItem("marketingTeachers")) || [];
+    let selectedStudio = localStorage.getItem("selectedStudio") || "sadat";
+    let timelineData = JSON.parse(localStorage.getItem("dailyTimelineData")) || { sadat: {}, shebin: {} };
+
+    if (!timelineData.sadat || !timelineData.shebin) {
+      timelineData = {
+        sadat: timelineData || {},
+        shebin: {}
+      };
+    }
+
+    function makeId() {
+      if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
+      return "id-" + Date.now() + "-" + Math.random().toString(16).slice(2);
+    }
+
+    function saveToStorage() {
+      localStorage.setItem("marketingTeachers", JSON.stringify(teachers));
+      localStorage.setItem("dailyTimelineData", JSON.stringify(timelineData));
+      localStorage.setItem("selectedStudio", selectedStudio);
+    }
+
+    function openView(viewId) {
+      document.querySelectorAll(".view-section").forEach(section => section.classList.remove("active"));
+      document.getElementById(viewId).classList.add("active");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      renderAllCards();
+      renderDailyTimeline();
+    }
+
+    function goHome() {
+      document.querySelectorAll(".view-section").forEach(section => section.classList.remove("active"));
+      document.getElementById("homeView").classList.add("active");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      renderAllCards();
+    }
+
+    function syncSearch(value) {
+      const mainSearch = document.getElementById("searchInput");
+      if (mainSearch) mainSearch.value = value;
+      renderAllCards();
+    }
+
+    function openTeacherModal(category, packageName) {
+      selectedCategory = category;
+      selectedPackage = packageName;
+      document.getElementById("teacherModalTitle").textContent = `إضافة مدرس - ${packageName}`;
+      document.getElementById("teacherForm").reset();
+      document.getElementById("subscriptionDate").valueAsDate = new Date();
+      document.getElementById("teacherModal").classList.add("active");
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove("active");
+    }
+
+    function generateTasks(packageName, subscriptionDate) {
+      const template = packageTemplates[packageName];
+      const tasks = [];
+      let taskNumber = 1;
+      const start = new Date(subscriptionDate);
+      const totalCount = template.reduce((sum, item) => sum + item.count, 0);
+      const interval = Math.max(1, Math.floor(30 / totalCount));
+
+      template.forEach(item => {
+        for (let i = 1; i <= item.count; i++) {
+          const due = new Date(start);
+          due.setDate(start.getDate() + ((taskNumber - 1) * interval));
+          const unitText = item.unit ? `${item.unit} ` : "";
+
+          tasks.push({
+            id: makeId(),
+            type: item.type,
+            title: `${unitText}${item.type} رقم ${i}`,
+            done: false,
+            notes: "",
+            dueDate: due.toISOString().split("T")[0],
+            uploadDate: ""
+          });
+
+          taskNumber++;
+        }
+      });
+
+      return tasks;
+    }
+
+    function saveTeacher(event) {
+      event.preventDefault();
+
+      const subscriptionDate = document.getElementById("subscriptionDate").value;
+
+      const teacher = {
+        id: makeId(),
+        category: selectedCategory,
+        packageName: selectedPackage,
+        name: document.getElementById("teacherName").value.trim(),
+        subject: document.getElementById("subject").value.trim(),
+        governorate: document.getElementById("governorate").value.trim(),
+        subscriptionDate: subscriptionDate,
+        extraDetails: document.getElementById("extraDetails").value.trim(),
+        tasks: generateTasks(selectedPackage, subscriptionDate)
+      };
+
+      teachers.push(teacher);
+      selectedTaskTypeByTeacher[teacher.id] = teacher.tasks[0]?.type || "";
+      saveToStorage();
+      closeModal("teacherModal");
+      renderAllCards();
+    }
+
+    function getProgress(teacher) {
+      if (!teacher.tasks.length) return 0;
+      const done = teacher.tasks.filter(task => task.done).length;
+      return Math.round((done / teacher.tasks.length) * 100);
+    }
+
+    function getExpectedProgress(teacher) {
+      const start = new Date(teacher.subscriptionDate);
+      const today = new Date();
+      const diffDays = Math.floor((today - start) / (1000 * 60 * 60 * 24));
+      return Math.min(100, Math.max(0, Math.round((diffDays / 30) * 100)));
+    }
+
+    function getStatus(teacher) {
+      const actual = getProgress(teacher);
+      const expected = getExpectedProgress(teacher);
+      if (actual + 10 < expected) return { text: "متأخر", className: "status-late" };
+      if (actual < expected) return { text: "محتاج تسرّع", className: "status-warn" };
+      return { text: "تمام", className: "status-good" };
+    }
+
+    function renderCards(category, containerId) {
+      const container = document.getElementById(containerId);
+      const query = (document.getElementById("searchInput")?.value || document.getElementById("youtubeSearchInput")?.value || "").toLowerCase().trim();
+      const filtered = teachers.filter(t => {
+        const text = `${t.name} ${t.subject} ${t.governorate} ${t.packageName}`.toLowerCase();
+        return t.category === category && text.includes(query);
+      });
+
+      if (!filtered.length) {
+        container.innerHTML = `<div class="empty-state">لا توجد باكدجات مضافة حتى الآن</div>`;
+        return;
       }
-      refs.studioBookingForm.addEventListener("submit", async (event) => {
-        event.preventDefault();
 
-        const clientId = refs.studioTeacherSelect.value;
-        const client = clients.find((item) => item.id === clientId);
+      container.innerHTML = filtered.map(teacher => {
+        const progress = getProgress(teacher);
+        const status = getStatus(teacher);
+        return `
+          <div class="teacher-card" onclick="openDetails('${teacher.id}')">
+            <h3>${teacher.name}</h3>
+            <p><strong>المادة:</strong> ${teacher.subject}</p>
+            <p><strong>المحافظة:</strong> ${teacher.governorate}</p>
+            <p><strong>الباكدج:</strong> ${teacher.packageName}</p>
+            <p><strong>الاشتراك:</strong> ${teacher.subscriptionDate}</p>
+            <div class="card-footer">
+              <span class="status-text ${status.className}">${status.text}</span>
+              <div class="progress-mini"><span style="width:${progress}%"></span></div>
+              <strong>${progress}%</strong>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
 
-        if (!client) {
-          alert("اختار المدرس أولًا.");
-          return;
-        }
+    function renderAllCards() {
+      renderCards("facebook", "facebookCards");
+      renderCards("youtube", "youtubeCards");
+      const facebookTotal = teachers.filter(t => t.category === "facebook").length;
+      const youtubeTotal = teachers.filter(t => t.category === "youtube").length;
+      document.getElementById("facebookCount").textContent = facebookTotal;
+      document.getElementById("youtubeCount").textContent = youtubeTotal;
+      document.getElementById("portalFacebookCount").textContent = facebookTotal;
+      document.getElementById("portalYoutubeCount").textContent = youtubeTotal;
+    }
 
-        const booking = {
-          id: crypto.randomUUID(),
-          clientId,
-          shootType: refs.studioShootType.value,
-          day: refs.studioDay.value,
-          time: refs.studioTime.value.trim(),
-          duration: refs.studioDuration.value.trim(),
-          repeat: refs.studioRepeat.value,
-          notes: refs.studioNotes.value.trim(),
-          createdAt: new Date().toISOString(),
-        };
+    function openDetails(id) {
+      selectedTeacherId = id;
+      const teacher = teachers.find(t => t.id === id);
+      if (!teacher) return;
 
-        studioBookings.unshift(booking);
-        await saveData();
+      const types = getTaskTypes(teacher);
+      if (!selectedTaskTypeByTeacher[teacher.id] || !types.includes(selectedTaskTypeByTeacher[teacher.id])) {
+        selectedTaskTypeByTeacher[teacher.id] = types[0];
+      }
 
-        refs.studioBookingForm.reset();
-        refs.studioDay.value = selectedShootingDay;
+      const progress = getProgress(teacher);
+      const expected = getExpectedProgress(teacher);
+      const status = getStatus(teacher);
+      const weeklyTarget = Math.ceil(teacher.tasks.length / 4);
+      const doneCount = teacher.tasks.filter(t => t.done).length;
 
-        render();
-      });
-      ["facebook", "youtube"].forEach((platform) =>
-        ["Search", "ClientFilter", "StatusFilter", "TypeFilter"].forEach(
-          (suffix) => {
-            const element = $(platform + suffix);
-            element.addEventListener("input", renderBoards);
-            element.addEventListener("change", renderBoards);
-          },
-        ),
-      );
-      refs.clearAll.addEventListener("click", async () => {
-        if (!confirm("هل تريد مسح كل العملاء والتاسكات؟")) return;
-        const oldClientIds = clients.map((c) => c.id),
-          oldTaskIds = tasks.map((t) => t.id);
-        clients = [];
-        tasks = [];
-        saveLocal();
-        if (useSupabase) {
-          try {
-            if (oldTaskIds.length)
-              await supabaseClient
-                .from("tasks")
-                .delete()
-                .in("id", oldTaskIds);
-            if (oldClientIds.length)
-              await supabaseClient
-                .from("clients")
-                .delete()
-                .in("id", oldClientIds);
-          } catch (e) {
-            console.error(e);
-          }
-        }
-        render();
-      });
-      refs.exportCsv.addEventListener("click", () => {
-        const rows = [
-          [
-            "اسم المدرس",
-            "المادة",
-            "اسم الباكدج",
-            "نوع الباكدج",
-            "تفاصيل الباكدج",
-            "نوع التاسك",
-            "تفاصيل التاسك",
-            "تاريخ التنفيذ",
-            "تاريخ الرفع",
-            "الحالة",
-          ],
-        ];
-        tasks.forEach((task) => {
-          const client = clients.find((item) => item.id === task.clientId);
-          if (!client) return;
-          rows.push([
-            client.teacherName,
-            client.subjectName,
-            client.packageName,
-            client.packagePlatform === "youtube" ? "يوتيوب" : "فيس بوك",
-            client.packageDetails,
-            taskTypes[task.type],
-            task.details,
-            task.executeDate,
-            task.uploadDate,
-            task.done ? "تم" : "متبقي",
-          ]);
+      document.getElementById("detailsTitle").textContent = `${teacher.name} - ${teacher.packageName}`;
+      document.getElementById("detailsContent").innerHTML = `
+        <div class="details-grid">
+          <div>
+            <div class="info-panel">
+              <h3 style="margin-bottom:10px;">بيانات المدرس</h3>
+              <p><strong>الاسم:</strong> ${teacher.name}</p>
+              <p><strong>المادة:</strong> ${teacher.subject}</p>
+              <p><strong>المحافظة:</strong> ${teacher.governorate}</p>
+              <p><strong>تاريخ الاشتراك:</strong> ${teacher.subscriptionDate}</p>
+              <p><strong>تفاصيل إضافية:</strong> ${teacher.extraDetails || "لا يوجد"}</p>
+            </div>
+
+            <div class="progress-box">
+              <h3>مؤشر تقدم الباكدج بالكامل</h3>
+              <div class="progress-track">
+                <div class="progress-fill" style="width:${progress}%"></div>
+              </div>
+              <p><strong>المنجز:</strong> ${doneCount} من ${teacher.tasks.length} تاسك - ${progress}%</p>
+              <p><strong>المفروض حتى الآن:</strong> ${expected}%</p>
+              <p class="status-text ${status.className}">الحالة: ${status.text}</p>
+
+              <div class="week-target">
+                <div class="week-card"><strong>الأسبوع 1</strong><span>${weeklyTarget} تاسك تقريباً</span></div>
+                <div class="week-card"><strong>الأسبوع 2</strong><span>${weeklyTarget} تاسك تقريباً</span></div>
+                <div class="week-card"><strong>الأسبوع 3</strong><span>${weeklyTarget} تاسك تقريباً</span></div>
+                <div class="week-card"><strong>الأسبوع 4</strong><span>${weeklyTarget} تاسك تقريباً</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-panel">
+            <h3 style="margin-bottom:10px;">محتويات الباكدج</h3>
+            ${renderPackageSummary(teacher.packageName)}
+            <button class="btn btn-danger" style="margin-top:14px;" onclick="deleteTeacher('${teacher.id}')">حذف المدرس</button>
+          </div>
+        </div>
+
+        <h3 style="margin: 16px 0;">جدول التاسكات حسب النوع</h3>
+        ${renderTaskTypeButtons(teacher)}
+        <div id="taskTypeTable">
+          ${renderTaskTableByType(teacher)}
+        </div>
+      `;
+
+      document.getElementById("detailsModal").classList.add("active");
+    }
+
+    function renderPackageSummary(packageName) {
+      return packageTemplates[packageName].map(item => {
+        const unit = item.unit ? item.unit : "تاسك";
+        return `<p style="margin:8px 0;"><strong>${item.count}</strong> ${unit} × ${item.type}</p>`;
+      }).join("");
+    }
+
+    function getTaskTypes(teacher) {
+      return [...new Set(teacher.tasks.map(task => task.type))];
+    }
+
+    function escapeForOnClick(text) {
+      return text.replace(/'/g, "\'");
+    }
+
+    function renderTaskTypeButtons(teacher) {
+      const types = getTaskTypes(teacher);
+
+      return `
+        <div class="task-type-tabs">
+          ${types.map(type => {
+            const total = teacher.tasks.filter(task => task.type === type).length;
+            const done = teacher.tasks.filter(task => task.type === type && task.done).length;
+            const active = selectedTaskTypeByTeacher[teacher.id] === type ? "active" : "";
+            return `<button class="task-type-btn ${active}" onclick="showTaskType('${teacher.id}', '${escapeForOnClick(type)}')">${type} <small>(${done}/${total})</small></button>`;
+          }).join("")}
+        </div>
+      `;
+    }
+
+    function renderTaskTableByType(teacher) {
+      const activeType = selectedTaskTypeByTeacher[teacher.id] || getTaskTypes(teacher)[0];
+      const tasks = teacher.tasks.filter(task => task.type === activeType);
+      const done = tasks.filter(task => task.done).length;
+      const progress = tasks.length ? Math.round((done / tasks.length) * 100) : 0;
+
+      return `
+        <div class="task-type-title">
+          <strong>${activeType}</strong>
+          <span>تم تنفيذ ${done} من ${tasks.length} - ${progress}%</span>
+        </div>
+
+        <div class="progress-track">
+          <div class="progress-fill" style="width:${progress}%"></div>
+        </div>
+
+        <div style="overflow:auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>تم</th>
+                <th>اسم التاسك</th>
+                <th>تفاصيل التاسك</th>
+                <th>تاريخ التنفيذ</th>
+                <th>تاريخ الرفع</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${tasks.map(task => {
+                const taskRowClass = task.done ? "task-row-done" : ((task.notes || "").trim() ? "task-row-note" : "");
+                return `
+                <tr class="${taskRowClass}">
+                  <td><input type="checkbox" ${task.done ? "checked" : ""} onchange="updateTask('${task.id}', 'done', this.checked)"></td>
+                  <td>${task.title}</td>
+                  <td><textarea class="task-note" oninput="updateTaskLive('${task.id}', 'notes', this.value, this)" placeholder="تفاصيل أو ملاحظات...">${task.notes || ""}</textarea></td>
+                  <td><input type="date" value="${task.dueDate || ""}" onchange="updateTask('${task.id}', 'dueDate', this.value)"></td>
+                  <td><input type="date" value="${task.uploadDate || ""}" onchange="updateTask('${task.id}', 'uploadDate', this.value)"></td>
+                </tr>
+                `;
+              }).join("")}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    function showTaskType(teacherId, type) {
+      selectedTaskTypeByTeacher[teacherId] = type;
+      openDetails(teacherId);
+    }
+
+    function updateTaskLive(taskId, field, value, element) {
+      const teacher = teachers.find(t => t.id === selectedTeacherId);
+      if (!teacher) return;
+
+      const task = teacher.tasks.find(t => t.id === taskId);
+      if (!task) return;
+
+      task[field] = value;
+      saveToStorage();
+
+      const row = element.closest("tr");
+      if (!row) return;
+
+      row.classList.remove("task-row-note", "task-row-done");
+      if (task.done) {
+        row.classList.add("task-row-done");
+      } else if ((task.notes || "").trim()) {
+        row.classList.add("task-row-note");
+      }
+    }
+
+    function updateTask(taskId, field, value) {
+      const teacher = teachers.find(t => t.id === selectedTeacherId);
+      if (!teacher) return;
+
+      const task = teacher.tasks.find(t => t.id === taskId);
+      if (!task) return;
+
+      task[field] = value;
+      saveToStorage();
+      openDetails(selectedTeacherId);
+      renderAllCards();
+    }
+
+    function deleteTeacher(id) {
+      if (!confirm("هل أنت متأكد من حذف هذا المدرس؟")) return;
+      teachers = teachers.filter(t => t.id !== id);
+      delete selectedTaskTypeByTeacher[id];
+      saveToStorage();
+      closeModal("detailsModal");
+      renderAllCards();
+    }
+
+    function getCurrentStudioData() {
+      if (!timelineData[selectedStudio]) timelineData[selectedStudio] = {};
+      return timelineData[selectedStudio];
+    }
+
+    function switchStudio(studio) {
+      selectedStudio = studio;
+      saveToStorage();
+      renderDailyTimeline();
+    }
+
+    function renderDailyTimeline() {
+      const table = document.getElementById("dailyTimeline");
+      const currentData = getCurrentStudioData();
+      const studioNames = {
+        sadat: "جدول استوديو السادات",
+        shebin: "جدول استوديو شبين"
+      };
+
+      document.getElementById("timelineTitle").textContent = studioNames[selectedStudio];
+      document.getElementById("sadatStudioBtn").classList.toggle("active", selectedStudio === "sadat");
+      document.getElementById("shebinStudioBtn").classList.toggle("active", selectedStudio === "shebin");
+
+      let html = `<thead><tr><th>الوقت</th>${days.map(day => `<th>${day}</th>`).join("")}</tr></thead><tbody>`;
+
+      hours.forEach(hour => {
+        html += `<tr><td>${hour}</td>`;
+        days.forEach(day => {
+          const key = `${day}-${hour}`;
+          const value = currentData[key] || "";
+          const selectedClass = value.trim() ? "scheduled-cell" : "";
+          html += `<td class="${selectedClass}"><textarea class="timeline-input" placeholder="اكتب معاد..." oninput="saveTimelineCell('${key}', this.value, this)">${value}</textarea></td>`;
         });
-        const csv =
-          "\ufeff" +
-          rows
-            .map((row) =>
-              row
-                .map((cell) => `"${String(cell).replaceAll('"', '""')}"`)
-                .join(","),
-            )
-            .join("\n");
-        const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement("a");
-        link.href = url;
-        link.download = "teacher-packages-tasks.csv";
-        link.click();
-        URL.revokeObjectURL(url);
+        html += `</tr>`;
       });
-      function render() {
-        renderClientList();
-        renderBoards();
+
+      html += `</tbody>`;
+      table.innerHTML = html;
+    }
+
+    function saveTimelineCell(key, value, input) {
+      const currentData = getCurrentStudioData();
+      currentData[key] = value;
+      input.closest("td").classList.toggle("scheduled-cell", value.trim() !== "");
+      saveToStorage();
+    }
+
+    function resetAllData() {
+      if (!confirm("سيتم مسح كل المدرسين والجدول الزمني. هل تريد المتابعة؟")) return;
+      teachers = [];
+      timelineData = { sadat: {}, shebin: {} };
+      selectedStudio = "sadat";
+      selectedTaskTypeByTeacher = {};
+      saveToStorage();
+      renderAllCards();
+      renderDailyTimeline();
+    }
+
+    window.addEventListener("click", function(event) {
+      if (event.target.classList.contains("modal")) {
+        event.target.classList.remove("active");
       }
-      loadData();
     });
+
+    renderAllCards();
+    renderDailyTimeline();
   </script>
 </body>
-
 </html>
