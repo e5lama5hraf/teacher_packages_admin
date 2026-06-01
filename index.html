@@ -220,14 +220,6 @@
       box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.14);
     }
 
-
-
-    .portal-intro {
-      text-align: center;
-      margin: 0 auto 26px;
-      padding: 0;
-    }
-
     .home-dashboard {
       position: relative;
       padding: 22px;
@@ -1089,21 +1081,19 @@
       border: 1px solid rgba(219, 234, 254, 0.9);
     }
 
-    th,
-    td {
+    th {
       border-bottom: 1px solid #e8f1ff;
       padding: 13px;
       text-align: right;
       font-size: 14px;
       vertical-align: top;
-    }
-
-    th {
       background: linear-gradient(135deg, var(--blue-950), var(--blue-800));
       color: #fff;
       white-space: nowrap;
       font-weight: 900;
     }
+
+
 
     tr:nth-child(even) td {
       background: #f8fbff;
@@ -1280,9 +1270,10 @@
     }
 
     .timeline-table td {
-      height: 56px;
+      /* height: 56px; */
       min-width: 120px;
       background: #fff;
+      padding-right: 30px;
     }
 
     .timeline-table td:first-child,
@@ -1487,6 +1478,11 @@
       letter-spacing: 3px;
       color: #fff;
       text-shadow: 0 0 26px rgba(208, 0, 255, 0.55), 0 10px 30px rgba(0, 0, 0, 0.32);
+    }
+
+    .company-logo img {
+      height: 150px;
+      width: 150px;
     }
 
     .company-logo::before {
@@ -1703,7 +1699,8 @@
     }
 
     .hero-tagline {
-      margin-top: 2px;
+      margin-top: -30px;
+      font-size: 25px;
     }
 
     .hero-socials {
@@ -2022,8 +2019,7 @@
   <header>
     <div class="hero-pattern"></div>
     <div class="brand-hero" aria-label="شعار الشركة">
-      <div class="company-logo">EDUBE</div>
-      <div class="hero-subbrand">Marketing Agency</div>
+      <div class="company-logo"><img src="assets/اللوجو.png" alt=""></div>
       <div class="hero-tagline">إبداع - سرعة - نتائج</div>
       <div class="hero-since">since 2023</div>
       <div class="hero-socials" aria-label="روابط الشركة">
@@ -2057,7 +2053,7 @@
           <button class="portal-card facebook-card" onclick="openView('facebookView')"
             aria-label="فتح باكدجات الفيس بوك">
             <span class="portal-label">قسم الباكدجات</span>
-            <h2>باكدجات الفيس بوك</h2>
+            <h2>باكدجات <br> الفيس بوك</h2>
             <p>تنظيم ومتابعة باكدجات السوشيال للمدرسين.</p>
             <div class="portal-icon">f</div>
             <div class="portal-meta"><span class="portal-count" id="portalFacebookCount">0</span><span>باكدج
@@ -2066,7 +2062,7 @@
 
           <button class="portal-card youtube-card" onclick="openView('youtubeView')" aria-label="فتح باكدجات اليوتيوب">
             <span class="portal-label">قسم الفيديو</span>
-            <h2>باكدجات اليوتيوب</h2>
+            <h2>باكدجات <br> اليوتيوب</h2>
             <p>إدارة التصوير، التصميم، والريلز الخاصة باليوتيوب.</p>
             <div class="portal-icon"></div>
             <div class="portal-meta"><span class="portal-count" id="portalYoutubeCount">0</span><span>باكدج مضافة</span>
@@ -2076,7 +2072,7 @@
           <button class="portal-card individual-services-card" onclick="openView('individualServicesView')"
             aria-label="فتح قسم الخدمات الفردية">
             <span class="portal-label">طلبات منفصلة</span>
-            <h2>قسم الخدمات الفردية</h2>
+            <h2>الخدمات <br> الفردية</h2>
             <p>إضافة ومتابعة الخدمات المطلوبة خارج الباكدجات.</p>
             <div class="portal-icon"></div>
             <div class="portal-meta"><span class="portal-count" id="portalServicesCount">0</span><span>خدمة مضافة</span>
@@ -2102,7 +2098,6 @@
       <div class="top-actions">
         <input id="searchInput" class="search-box" type="text"
           placeholder="ابحث باسم المدرس، المادة، المحافظة، أو نوع الباكدج..." oninput="renderAllCards()" />
-        <button class="btn btn-dark" onclick="resetAllData()">مسح كل البيانات</button>
       </div>
 
       <div class="section">
@@ -2114,9 +2109,9 @@
         </div>
 
         <div class="package-buttons">
-          <button class="package-btn" onclick="openTeacherModal('facebook', 'face 1')">face 1</button>
-          <button class="package-btn" onclick="openTeacherModal('facebook', 'face 2')">face 2</button>
-          <button class="package-btn" onclick="openTeacherModal('facebook', 'face 3')">face 3</button>
+          <button class="package-btn" onclick="openTeacherModal('facebook', 'face 1')">Silver</button>
+          <button class="package-btn" onclick="openTeacherModal('facebook', 'face 2')">Gold</button>
+          <button class="package-btn" onclick="openTeacherModal('facebook', 'face 3')">Platinum</button>
         </div>
 
         <div id="facebookCards" class="cards"></div>
@@ -2131,7 +2126,6 @@
       <div class="top-actions">
         <input id="youtubeSearchInput" class="search-box" type="text"
           placeholder="ابحث باسم المدرس، المادة، المحافظة، أو نوع الباكدج..." oninput="syncSearch(this.value)" />
-        <button class="btn btn-dark" onclick="resetAllData()">مسح كل البيانات</button>
       </div>
 
       <div class="section">
@@ -2143,9 +2137,9 @@
         </div>
 
         <div class="package-buttons">
-          <button class="package-btn" onclick="openTeacherModal('youtube', 'youtube 1')">youtube 1</button>
-          <button class="package-btn" onclick="openTeacherModal('youtube', 'youtube 2')">youtube 2</button>
-          <button class="package-btn" onclick="openTeacherModal('youtube', 'youtube 3')">youtube 3</button>
+          <button class="package-btn" onclick="openTeacherModal('youtube', 'youtube 1')">Silver</button>
+          <button class="package-btn" onclick="openTeacherModal('youtube', 'youtube 2')">Gold</button>
+          <button class="package-btn" onclick="openTeacherModal('youtube', 'youtube 3')">Platinum</button>
         </div>
 
         <div id="youtubeCards" class="cards"></div>
@@ -2160,7 +2154,7 @@
       <section class="section">
         <div class="section-header">
           <div class="section-title">
-            <h2>قسم الخدمات الفردية</h2>
+            <h2>الخدمات الفردية</h2>
             <span class="badge" id="servicesCountBadge">0</span>
           </div>
         </div>
@@ -2238,8 +2232,6 @@
             <span class="badge">8 صباحاً - 2 صباحاً</span>
           </div>
         </div>
-        <p style="color:#6b7280; margin-bottom: 12px;">اختار الاستوديو من الأزرار، واكتب المعاد أو المهمة داخل الخانة.
-          أي خانة يتم تحديدها ستظهر بلون مختلف تلقائياً.</p>
         <div class="studio-tabs">
           <button id="sadatStudioBtn" class="studio-btn active" onclick="switchStudio('sadat')">جدول استوديو
             السادات</button>
@@ -2846,7 +2838,7 @@
           const key = `${day}-${hour}`;
           const value = currentData[key] || "";
           const selectedClass = value.trim() ? "scheduled-cell" : "";
-          html += `<td class="${selectedClass}"><textarea class="timeline-input" placeholder="اكتب معاد..." oninput="saveTimelineCell('${key}', this.value, this)">${value}</textarea></td>`;
+          html += `<td class="${selectedClass}"><textarea class="timeline-input" oninput="saveTimelineCell('${key}', this.value, this)">${value}</textarea></td>`;
         });
         html += `</tr>`;
       });
@@ -2935,18 +2927,6 @@
       saveToStorage();
       renderIndividualServices();
       renderAllCards();
-    }
-
-    function resetAllData() {
-      if (!confirm("سيتم مسح كل المدرسين والخدمات الفردية والجدول الزمني. هل تريد المتابعة؟")) return;
-      teachers = [];
-      timelineData = { sadat: {}, shebin: {} };
-      selectedStudio = "sadat";
-      selectedTaskTypeByTeacher = {};
-      individualServices = [];
-      saveToStorage();
-      renderAllCards();
-      renderDailyTimeline();
     }
 
     window.addEventListener("click", function (event) {
